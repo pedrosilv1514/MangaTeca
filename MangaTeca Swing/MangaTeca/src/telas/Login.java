@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 /**
@@ -10,9 +6,6 @@ package telas;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
     public Login() {
         initComponents();
     }
@@ -27,90 +20,64 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jTextField2 = new javax.swing.JTextField();
+        lblTitulo = new javax.swing.JLabel();
+        lblEmailLogin = new javax.swing.JLabel();
+        lblSenhaLogin = new javax.swing.JLabel();
+        txtConfirmaLogin = new javax.swing.JToggleButton();
+        txtSenhaLogin = new javax.swing.JPasswordField();
+        txtEmailLogin = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MangaTeca");
-        setPreferredSize(new java.awt.Dimension(720, 512));
 
         jPanel1.setBackground(new java.awt.Color(23, 23, 23));
         jPanel1.setPreferredSize(new java.awt.Dimension(720, 512));
+        jPanel1.setLayout(null);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Logo MangaTeca Pequena.png"))); // NOI18N
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Logo MangaTeca Pequena.png"))); // NOI18N
+        jPanel1.add(lblTitulo);
+        lblTitulo.setBounds(127, 82, 454, 67);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(237, 237, 237));
-        jLabel2.setText("E-Mail");
+        lblEmailLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblEmailLogin.setForeground(new java.awt.Color(237, 237, 237));
+        lblEmailLogin.setText("E-Mail");
+        jPanel1.add(lblEmailLogin);
+        lblEmailLogin.setBounds(127, 180, 96, 32);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(237, 237, 237));
-        jLabel3.setText("Senha");
+        lblSenhaLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblSenhaLogin.setForeground(new java.awt.Color(237, 237, 237));
+        lblSenhaLogin.setText("Senha");
+        jPanel1.add(lblSenhaLogin);
+        lblSenhaLogin.setBounds(127, 267, 96, 32);
 
-        jToggleButton1.setBackground(new java.awt.Color(218, 0, 55));
-        jToggleButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jToggleButton1.setForeground(new java.awt.Color(237, 237, 237));
-        jToggleButton1.setText("Entrar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtConfirmaLogin.setBackground(new java.awt.Color(218, 0, 55));
+        txtConfirmaLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtConfirmaLogin.setForeground(new java.awt.Color(237, 237, 237));
+        txtConfirmaLogin.setText("Entrar");
+        txtConfirmaLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                txtConfirmaLoginActionPerformed(evt);
             }
         });
+        jPanel1.add(txtConfirmaLogin);
+        txtConfirmaLogin.setBounds(244, 391, 209, 47);
 
-        jPasswordField1.setBackground(new java.awt.Color(68, 68, 68));
-        jPasswordField1.setForeground(new java.awt.Color(237, 237, 237));
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        txtSenhaLogin.setBackground(new java.awt.Color(68, 68, 68));
+        txtSenhaLogin.setForeground(new java.awt.Color(237, 237, 237));
+        txtSenhaLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                txtSenhaLoginActionPerformed(evt);
             }
         });
+        jPanel1.add(txtSenhaLogin);
+        txtSenhaLogin.setBounds(127, 305, 454, 30);
 
-        jTextField2.setBackground(new java.awt.Color(68, 68, 68));
-        jTextField2.setForeground(new java.awt.Color(237, 237, 237));
-        jTextField2.setToolTipText("");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1)
-                            .addComponent(jTextField2))))
-                .addContainerGap(139, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
+        txtEmailLogin.setBackground(new java.awt.Color(68, 68, 68));
+        txtEmailLogin.setForeground(new java.awt.Color(237, 237, 237));
+        txtEmailLogin.setToolTipText("");
+        jPanel1.add(txtEmailLogin);
+        txtEmailLogin.setBounds(127, 218, 454, 22);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,18 +94,23 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    private void txtSenhaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaLoginActionPerformed
+        
+    }//GEN-LAST:event_txtSenhaLoginActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void txtConfirmaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLoginActionPerformed
+       //apenas testando
+       String texto = txtSenhaLogin.getText();
+       System.out.println(texto);
+       String texto2 = txtEmailLogin.getText();
+        System.out.println(texto2);
+    }//GEN-LAST:event_txtConfirmaLoginActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -171,12 +143,12 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel lblEmailLogin;
+    private javax.swing.JLabel lblSenhaLogin;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JToggleButton txtConfirmaLogin;
+    private javax.swing.JTextField txtEmailLogin;
+    private javax.swing.JPasswordField txtSenhaLogin;
     // End of variables declaration//GEN-END:variables
 }

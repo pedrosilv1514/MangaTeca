@@ -10,17 +10,14 @@ public class Cliente extends Usuario {
     
     public void Cliente(){
     }
-    public void registrar(){
-        
-    }
+    
     public void pagar(String senha, double total){
         
     }
     public void adicionarAvaliacao(String comentario, int Avaliacao){
+    
     }
-    public void comprar(){
-        
-    }
+    
     public double getLimiteConta() {
         return LimiteConta;
     }

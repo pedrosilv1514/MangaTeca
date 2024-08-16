@@ -9,6 +9,10 @@ public class Avaliacao {
     protected Cliente cliente;
     protected Manga manga;
 
+    public void Avaliar(int nota, String comentario){
+        
+    }
+    
     public int getNota() {
         return nota;
     }

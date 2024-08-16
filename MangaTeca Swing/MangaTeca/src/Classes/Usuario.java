@@ -3,7 +3,6 @@ import java.util.*;
 
 public class Usuario {
     protected String NomeUsuario;
-    protected int id;
     protected String email;
     protected String senha;
 
@@ -15,17 +14,6 @@ public class Usuario {
     public boolean Logar(String email, String senha){
         return true; //temporario
     }
-    public void Avaliar(Manga manga, float nota, String comentario){
-        /*
-        ISSO AQUI TEM QUE IR PRO CLIENTE!!
-        */
-    }
-    
-    public void AdicionarAoCarrinho(Manga manga){
-        /*
-        ISSO AQUI TEM QUE IR PRO CLIENTE!!
-        */
-    }
 
     public String getNomeUsuario() {
         return NomeUsuario;
@@ -33,14 +21,6 @@ public class Usuario {
 
     public void setNomeUsuario(String NomeUsuario) {
         this.NomeUsuario = NomeUsuario;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getEmail() {

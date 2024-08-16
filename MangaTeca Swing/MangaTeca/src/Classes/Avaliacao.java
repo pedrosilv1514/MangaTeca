@@ -1,11 +1,12 @@
 package Classes;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Avaliacao {
     protected int nota;
     protected String comentario;
-    protected Date data;
-    protected Usuario usuario;
+    protected LocalDate data;
+    protected Cliente cliente;
     protected Manga manga;
 
     public int getNota() {
@@ -24,21 +25,22 @@ public class Avaliacao {
         this.comentario = comentario;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
+    
 
     public Manga getManga() {
         return manga;

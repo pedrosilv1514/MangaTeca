@@ -1,7 +1,7 @@
 package Classes;
 import java.util.*;
 
-public class CarrinhoDeCompras {
+public class CarrinhoDeCompras implements Pagavel {
     protected double total;
     protected ArrayList<Manga> produtos;
     
@@ -35,6 +35,21 @@ public class CarrinhoDeCompras {
 
     public void setProdutos(ArrayList<Manga> produtos) {
         this.produtos = produtos;
+    }
+
+    @Override
+    public void realizarPagamento() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public double calcularValor() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void validarPagamento() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

@@ -6,6 +6,7 @@ public class Cliente extends Usuario {
     protected ArrayList<Object> historicoCompras;
     protected ArrayList<Avaliacao> avaliacoes;
     protected ArrayList<CarrinhoDeCompras> carrinhoCompras;
+    protected Cartao cartao;
     
     public void Cliente(){
     }
@@ -50,6 +51,14 @@ public class Cliente extends Usuario {
 
     public void setCarrinhoCompras(ArrayList<CarrinhoDeCompras> carrinhoCompras) {
         this.carrinhoCompras = carrinhoCompras;
+    }
+
+    public Cartao getCartao() {
+        return cartao;
+    }
+
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
     }
     
 }

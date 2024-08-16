@@ -6,9 +6,7 @@ public class Usuario {
     protected int id;
     protected String email;
     protected String senha;
-    public Usuario(){
-        
-    }
+
     public void Cadastrar(String NomeUsuario, String senha, String email){
         this.NomeUsuario = NomeUsuario;
         this.senha = senha;
@@ -18,10 +16,15 @@ public class Usuario {
         return true; //temporario
     }
     public void Avaliar(Manga manga, float nota, String comentario){
-        
+        /*
+        ISSO AQUI TEM QUE IR PRO CLIENTE!!
+        */
     }
+    
     public void AdicionarAoCarrinho(Manga manga){
-        
+        /*
+        ISSO AQUI TEM QUE IR PRO CLIENTE!!
+        */
     }
 
     public String getNomeUsuario() {

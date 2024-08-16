@@ -1,5 +1,6 @@
 package Classes;
 import java.util.*;
+import javax.swing.ImageIcon;
 
 public class Manga {
     protected String titulo;
@@ -9,11 +10,15 @@ public class Manga {
     protected double preço;
     protected ArrayList<Avaliacao> avaliacoes;
     protected Genero genero;
+    protected ImageIcon imagem;
+    
     public void Manga(){
         
     }
     public void AtualizarEstoque(int quantidade){
-        
+        /*
+        provavelmente isso aqui devia ter só no adm
+        */
     }
     public double CalcularMedia(ArrayList<Object> avaliacoes){
         return 0.00; //temporario
@@ -74,5 +79,14 @@ public class Manga {
     public void setGenero(Genero genero) {
         this.genero = genero;
     }
+
+    public ImageIcon getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(ImageIcon imagem) {
+        this.imagem = imagem;
+    }
+    
     
 }

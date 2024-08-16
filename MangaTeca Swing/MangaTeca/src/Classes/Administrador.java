@@ -3,8 +3,6 @@ import java.util.*;
 
 
 public class Administrador extends Usuario {
-    protected String nomeAdministrador;
-    protected String senhaAdministrador;
     protected RelatorioDeVendas relatorioDeVendas;
     
     public Administrador(){
@@ -26,22 +24,6 @@ public class Administrador extends Usuario {
     }
     public RelatorioDeVendas gerarRelatorioDeVendas(){
         return relatorioDeVendas; //temporario
-    }
-
-    public String getNomeAdministrador() {
-        return nomeAdministrador;
-    }
-
-    public void setNomeAdministrador(String nomeAdministrador) {
-        this.nomeAdministrador = nomeAdministrador;
-    }
-
-    public String getSenhaAdministrador() {
-        return senhaAdministrador;
-    }
-
-    public void setSenhaAdministrador(String senhaAdministrador) {
-        this.senhaAdministrador = senhaAdministrador;
     }
 
     public RelatorioDeVendas getRelatorioDeVendas() {

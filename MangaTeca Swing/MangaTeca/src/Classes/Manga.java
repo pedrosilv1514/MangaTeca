@@ -16,9 +16,7 @@ public class Manga {
         
     }
     public void AtualizarEstoque(int quantidade){
-        /*
-        provavelmente isso aqui devia ter só no adm
-        */
+        
     }
     public double CalcularMedia(ArrayList<Object> avaliacoes){
         return 0.00; //temporario

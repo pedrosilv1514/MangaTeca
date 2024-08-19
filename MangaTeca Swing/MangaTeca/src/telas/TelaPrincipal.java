@@ -28,6 +28,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         logoMangaTeca = new javax.swing.JLabel();
         btnCadastro = new javax.swing.JToggleButton();
         btnLogin = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MangaTeca");
@@ -66,6 +67,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         telaInicial.add(btnLogin);
         btnLogin.setBounds(213, 223, 316, 59);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(237, 237, 237));
+        jLabel1.setText("© MangaTeca 2024.");
+        telaInicial.add(jLabel1);
+        jLabel1.setBounds(250, 470, 240, 32);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,6 +141,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCadastro;
     private javax.swing.JToggleButton btnLogin;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel logoMangaTeca;
     private javax.swing.JPanel telaInicial;
     // End of variables declaration//GEN-END:variables

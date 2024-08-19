@@ -15,6 +15,7 @@ public class Homepage extends javax.swing.JFrame {
      */
     public Homepage() {
         initComponents();
+        setSize(720,512);
     }
 
     /**
@@ -26,20 +27,32 @@ public class Homepage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        telaInicial = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Homepage");
+        setMaximumSize(new java.awt.Dimension(720, 512));
+        setMinimumSize(new java.awt.Dimension(720, 512));
+        setResizable(false);
+        setSize(new java.awt.Dimension(720, 512));
+
+        telaInicial.setBackground(new java.awt.Color(23, 23, 23));
+        telaInicial.setPreferredSize(new java.awt.Dimension(720, 512));
+        telaInicial.setLayout(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(telaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(telaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -78,5 +91,6 @@ public class Homepage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel telaInicial;
     // End of variables declaration//GEN-END:variables
 }

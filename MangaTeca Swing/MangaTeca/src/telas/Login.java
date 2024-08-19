@@ -99,10 +99,10 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaLoginActionPerformed
 
     private void txtConfirmaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLoginActionPerformed
-       //apenas testando
-       String texto = txtSenhaLogin.getText();
-       System.out.println(texto);
-       String texto2 = txtEmailLogin.getText();
+        //apenas testando
+        String texto = txtSenhaLogin.getText();
+        System.out.println(texto);
+        String texto2 = txtEmailLogin.getText();
         System.out.println(texto2);
     }//GEN-LAST:event_txtConfirmaLoginActionPerformed
 
@@ -143,7 +143,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel lblEmailLogin;
     private javax.swing.JLabel lblSenhaLogin;
     private javax.swing.JLabel lblTitulo;

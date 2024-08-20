@@ -38,6 +38,20 @@ public class ConfigAdm extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        txtConfirmaLogin = new javax.swing.JToggleButton();
+        txtConfirmaLogin1 = new javax.swing.JToggleButton();
+        txtConfirmaLogin2 = new javax.swing.JToggleButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,21 +139,132 @@ public class ConfigAdm extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 720, 60);
 
-        jTextField1.setText("jTextField1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTextField1);
-        jTextField1.setBounds(20, 130, 120, 22);
+        jTextField1.setBounds(130, 220, 80, 22);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(237, 237, 237));
-        jLabel2.setText("Título");
+        jLabel2.setText("Sinopse");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 110, 50, 20);
+        jLabel2.setBounds(330, 100, 50, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(237, 237, 237));
         jLabel5.setText("Administrar Mangás");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(10, 60, 250, 40);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(237, 237, 237));
+        jLabel3.setText("Título");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(20, 100, 50, 20);
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField2);
+        jTextField2.setBounds(20, 120, 260, 22);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(237, 237, 237));
+        jLabel7.setText("Estoque");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(130, 200, 50, 20);
+
+        jTextArea1.setColumns(1);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Chiyo Mihama é uma criança prodígio que pulou várias séries para terminar o ensino médio. No primeiro dia, ela descobre que sua turma está cheia de indivíduos excêntricos. À medida que as colegas se tornam boas amigas ao longo do tempo, elas vivenciam a vida cotidiana juntos – coisas como escola, estudo, viagens de verão e envolvimento em todos os tipos de travessuras!\n\n");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(330, 120, 350, 130);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(237, 237, 237));
+        jLabel9.setText("Autor");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(20, 150, 50, 20);
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField3);
+        jTextField3.setBounds(20, 170, 260, 22);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(237, 237, 237));
+        jLabel10.setText("Preço");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(20, 200, 50, 20);
+
+        jTextField4.setText("R$ 00,00");
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField4);
+        jTextField4.setBounds(20, 220, 80, 22);
+
+        txtConfirmaLogin.setBackground(new java.awt.Color(218, 0, 55));
+        txtConfirmaLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtConfirmaLogin.setForeground(new java.awt.Color(237, 237, 237));
+        txtConfirmaLogin.setText("Remover");
+        txtConfirmaLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConfirmaLoginActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtConfirmaLogin);
+        txtConfirmaLogin.setBounds(480, 270, 170, 40);
+
+        txtConfirmaLogin1.setBackground(new java.awt.Color(218, 0, 55));
+        txtConfirmaLogin1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtConfirmaLogin1.setForeground(new java.awt.Color(237, 237, 237));
+        txtConfirmaLogin1.setText("Adicionar");
+        txtConfirmaLogin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConfirmaLogin1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtConfirmaLogin1);
+        txtConfirmaLogin1.setBounds(20, 270, 170, 40);
+
+        txtConfirmaLogin2.setBackground(new java.awt.Color(218, 0, 55));
+        txtConfirmaLogin2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtConfirmaLogin2.setForeground(new java.awt.Color(237, 237, 237));
+        txtConfirmaLogin2.setText("Editar");
+        txtConfirmaLogin2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConfirmaLogin2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtConfirmaLogin2);
+        txtConfirmaLogin2.setBounds(250, 270, 170, 40);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Azumanga Daioh!", "Kiyohiko Azuma", "Sinopse", "R$ 20,00", "5"}
+            },
+            new String [] {
+                "Título", "Autor", "Sinopse", "Preço", "Estoque"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(0, 330, 720, 180);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,6 +283,34 @@ public class ConfigAdm extends javax.swing.JFrame {
     private void jPanel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseEntered
         jPanel4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_jPanel4MouseEntered
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void txtConfirmaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLoginActionPerformed
+
+    }//GEN-LAST:event_txtConfirmaLoginActionPerformed
+
+    private void txtConfirmaLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLogin1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtConfirmaLogin1ActionPerformed
+
+    private void txtConfirmaLogin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLogin2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtConfirmaLogin2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,14 +349,28 @@ public class ConfigAdm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JToggleButton txtConfirmaLogin;
+    private javax.swing.JToggleButton txtConfirmaLogin1;
+    private javax.swing.JToggleButton txtConfirmaLogin2;
     // End of variables declaration//GEN-END:variables
 }

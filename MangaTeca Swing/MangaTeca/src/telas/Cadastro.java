@@ -1,5 +1,7 @@
 package telas;
 import Classes.Cliente;
+import Classes.Sistema;
+import Classes.Usuario;
 import telas.TelaPrincipal;
 import java.util.*;
 import javax.swing.*;
@@ -8,7 +10,7 @@ import javax.swing.*;
  * @author eduar
  */
 public class Cadastro extends javax.swing.JFrame {
-
+    Sistema sistema = new Sistema();
     boolean mostra = false;
     public Cadastro() {
         initComponents();
@@ -28,9 +30,9 @@ public class Cadastro extends javax.swing.JFrame {
         lblUsuarioCadastro = new javax.swing.JLabel();
         lblSenhaCadastro = new javax.swing.JLabel();
         txtConfirmaCadastro = new javax.swing.JToggleButton();
-        jButton1 = new javax.swing.JButton();
         txtUsuarioCadastro = new javax.swing.JTextField();
         txtEmailCadastro = new javax.swing.JTextField();
+        labelSenha = new javax.swing.JLabel();
         txtSenhaCadastro = new javax.swing.JPasswordField();
         lblEmailCadastro = new javax.swing.JLabel();
 
@@ -71,17 +73,6 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel1.add(txtConfirmaCadastro);
         txtConfirmaCadastro.setBounds(250, 400, 240, 47);
 
-        jButton1.setBackground(new java.awt.Color(68, 68, 68));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Visibilidade.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(550, 330, 30, 20);
-
         txtUsuarioCadastro.setBackground(new java.awt.Color(68, 68, 68));
         txtUsuarioCadastro.setForeground(new java.awt.Color(237, 237, 237));
         txtUsuarioCadastro.setToolTipText("");
@@ -93,6 +84,15 @@ public class Cadastro extends javax.swing.JFrame {
         txtEmailCadastro.setToolTipText("");
         jPanel1.add(txtEmailCadastro);
         txtEmailCadastro.setBounds(130, 180, 454, 22);
+
+        labelSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Olho aberto.png"))); // NOI18N
+        labelSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelSenhaMouseClicked(evt);
+            }
+        });
+        jPanel1.add(labelSenha);
+        labelSenha.setBounds(550, 320, 30, 40);
 
         txtSenhaCadastro.setBackground(new java.awt.Color(68, 68, 68));
         txtSenhaCadastro.setForeground(new java.awt.Color(237, 237, 237));
@@ -139,6 +139,10 @@ public class Cadastro extends javax.swing.JFrame {
             novoCliente.setNomeUsuario(texto2);
             novoCliente.setSenha(texto);
             JOptionPane.showMessageDialog(null, "Novo usuário cadastrado:" + texto2,"Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            Sistema.addUsuario(novoCliente);
+            for (Usuario u : Sistema.getUsuarios()) {
+                System.out.println(u);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Insira um e-mail válido!" ,"Erro ao cadastrar", JOptionPane.ERROR_MESSAGE);
         }
@@ -150,17 +154,17 @@ public class Cadastro extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtSenhaCadastroActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //tentei fazer um botão pra deixar a senha visível e escondida
-        //mas não funciona, ainda continua mostrando *** no campo de senha
-        if (mostra == false){
+    private void labelSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSenhaMouseClicked
+        if(mostra==false){
+            labelSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Olho fechado.png")));
+            txtSenhaCadastro.setEchoChar((char)0);
             mostra = true;
-            String senha = txtSenhaCadastro.getText();
-            txtSenhaCadastro.setText(senha);
-        } else {
+        }else{
+            labelSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Olho aberto.png")));
+            txtSenhaCadastro.setEchoChar('\u25cf');
             mostra = false;
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_labelSenhaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -197,8 +201,8 @@ public class Cadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelSenha;
     private javax.swing.JLabel lblEmailCadastro;
     private javax.swing.JLabel lblSenhaCadastro;
     private javax.swing.JLabel lblTitulo;

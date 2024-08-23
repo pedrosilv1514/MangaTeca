@@ -5,12 +5,14 @@
 package telas;
 
 import java.awt.Cursor;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -24,10 +26,12 @@ public class Homepage extends javax.swing.JFrame {
     public Homepage() throws IOException {
         initComponents();
         URL url = new URL("https://imgsrv.crunchyroll.com/cdn-cgi/image/fit=contain,format=auto,quality=85,width=480,height=720/catalog/crunchyroll/cbb55a6382682bf71e91f685c6473c5a.jpg");
-        BufferedImage imagem = ImageIO.read(url);
-        //lblMangaTop1.setIcon(sdas)
-                
-        setSize(720,512);
+        ImageIcon iconOriginal = new ImageIcon(url);
+        int larguraNova = 120;
+        int alturaNova = 180;
+        Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
+        ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
+        lblMangaTop1.setIcon(iconRedimensionado);
     }
 
     /**
@@ -137,6 +141,11 @@ public class Homepage extends javax.swing.JFrame {
 
         lblMangaTop2.setForeground(new java.awt.Color(255, 255, 255));
         lblMangaTop2.setText("MANGA 2");
+        lblMangaTop2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMangaTop2MouseEntered(evt);
+            }
+        });
         telaInicial.add(lblMangaTop2);
         lblMangaTop2.setBounds(130, 130, 60, 16);
 
@@ -146,9 +155,16 @@ public class Homepage extends javax.swing.JFrame {
         lblMangaTop3.setBounds(540, 130, 60, 16);
 
         lblMangaTop1.setForeground(new java.awt.Color(255, 255, 255));
-        lblMangaTop1.setText("MANGA 1");
+        lblMangaTop1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMangaTop1MouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblMangaTop1MousePressed(evt);
+            }
+        });
         telaInicial.add(lblMangaTop1);
-        lblMangaTop1.setBounds(330, 130, 60, 16);
+        lblMangaTop1.setBounds(220, 120, 260, 200);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,6 +188,18 @@ public class Homepage extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void lblMangaTop1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMangaTop1MousePressed
+
+    }//GEN-LAST:event_lblMangaTop1MousePressed
+
+    private void lblMangaTop1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMangaTop1MouseEntered
+        lblMangaTop1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lblMangaTop1MouseEntered
+
+    private void lblMangaTop2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMangaTop2MouseEntered
+
+    }//GEN-LAST:event_lblMangaTop2MouseEntered
 
     /**
      * @param args the command line arguments

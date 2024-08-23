@@ -10,9 +10,7 @@ package telas;
  */
 public class Pagamento extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Pagamento
-     */
+    boolean mostra = false;
     public Pagamento() {
         initComponents();
     }
@@ -33,7 +31,8 @@ public class Pagamento extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        labelSenha = new javax.swing.JLabel();
+        txtSenhaCartao = new javax.swing.JPasswordField();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -45,6 +44,7 @@ public class Pagamento extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(720, 512));
 
         jPanel1.setBackground(new java.awt.Color(23, 23, 23));
+        jPanel1.setMinimumSize(new java.awt.Dimension(720, 512));
         jPanel1.setLayout(null);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/imagem_calendario.png"))); // NOI18N
@@ -80,9 +80,18 @@ public class Pagamento extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(71, 101, 168, 264);
 
-        jPasswordField1.setText("jPasswordField1");
-        jPanel1.add(jPasswordField1);
-        jPasswordField1.setBounds(340, 300, 315, 30);
+        labelSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Olho aberto.png"))); // NOI18N
+        labelSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelSenhaMouseClicked(evt);
+            }
+        });
+        jPanel1.add(labelSenha);
+        labelSenha.setBounds(620, 300, 30, 30);
+
+        txtSenhaCartao.setText("jPasswordField1");
+        jPanel1.add(txtSenhaCartao);
+        txtSenhaCartao.setBounds(340, 300, 315, 30);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +170,18 @@ public class Pagamento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void labelSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSenhaMouseClicked
+        if(mostra==false){
+            labelSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Olho fechado.png")));
+            txtSenhaCartao.setEchoChar((char)0);
+            mostra = true;
+        }else{
+            labelSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Olho aberto.png")));
+            txtSenhaCartao.setEchoChar('\u25cf');
+            mostra = false;
+        }
+    }//GEN-LAST:event_labelSenhaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -207,9 +228,10 @@ public class Pagamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel labelSenha;
+    private javax.swing.JPasswordField txtSenhaCartao;
     // End of variables declaration//GEN-END:variables
 }

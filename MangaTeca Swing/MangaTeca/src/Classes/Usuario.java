@@ -5,7 +5,7 @@ public class Usuario {
     protected String NomeUsuario;
     protected String email;
     protected String senha;
-
+    
     public void Cadastrar(String NomeUsuario, String senha, String email){
         this.NomeUsuario = NomeUsuario;
         this.senha = senha;

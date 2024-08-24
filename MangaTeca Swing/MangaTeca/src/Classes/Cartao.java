@@ -63,5 +63,11 @@ public class Cartao implements Pagavel{
     public void validarPagamento() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public String toString() {
+        return "Cartao{" + "numero=" + numero + ", cvc=" + cvc + ", validade=" + validade + ", cliente=" + cliente + '}';
+    }
+    
     
 }

@@ -8,7 +8,7 @@ public abstract class Genero {
         this.tipo = tipo;
     }
     
-    public String getNome(){
+    public String getTipo(){
         return ""; //temporario
     }
     

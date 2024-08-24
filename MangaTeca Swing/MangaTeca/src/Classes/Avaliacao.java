@@ -8,7 +8,14 @@ public class Avaliacao {
     protected LocalDate data;
     protected Cliente cliente;
     protected Manga manga;
-
+    
+    public Avaliacao(){}
+    
+    public Avaliacao(int nota, String comentario, LocalDate data){
+        this.nota = nota;
+        this.comentario = comentario;
+        this.data = data;
+    }
     public void Avaliar(int nota, String comentario){
         
     }
@@ -53,5 +60,12 @@ public class Avaliacao {
     public void setManga(Manga manga) {
         this.manga = manga;
     }
+
+    @Override
+    public String toString() {
+        return "Avaliacao{" + "nota=" + nota + ", comentario=" + comentario + ", data=" + data + ", cliente=" + cliente + ", manga=" + manga + '}';
+    }
+    
+    
       
 }

@@ -20,7 +20,7 @@ public class Sistema {
             FileWriter writer = new FileWriter(csvUsuarios,StandardCharsets.ISO_8859_1, existe);
             
             if (!existe) {
-                writer.write("NomeUsuario;Email;Senha;Cartao;HistoricoCompras;Avaliacoes;CarrinhoCompras\n");
+                writer.write("NomeUsuario;Email;Senha;HistoricoCompras;Avaliacoes;CarrinhoCompras;Cartao\n");
             }
             
             //Escrever os dados do usuario no formato certo

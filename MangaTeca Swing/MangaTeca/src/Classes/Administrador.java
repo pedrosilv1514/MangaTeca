@@ -7,6 +7,7 @@ public class Administrador extends Usuario {
     
     public Administrador(){
     }
+    
     public void adicionarManga(Manga manga){
     
     }

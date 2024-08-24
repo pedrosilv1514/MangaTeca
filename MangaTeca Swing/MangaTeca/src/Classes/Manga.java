@@ -3,21 +3,21 @@ import java.util.*;
 import javax.swing.ImageIcon;
 
 public class Manga {
+    protected int id;
     protected String titulo;
     protected String sinopse;
+    protected Genero genero;
     protected String autor;
     protected int estoque;
     protected double preco;
     protected ArrayList<Avaliacao> avaliacoes;
-    protected Genero genero;
     protected String linkImagem;
-    protected int id;
     
     public void Manga(){
         
     }
     
-    public Manga(String titulo, String sinopse, String autor, int estoque, double preco, int id, ArrayList<Avaliacao> avaliacoes, Genero genero, String linkImagem){
+    public Manga(int id, String titulo, String sinopse, Genero genero, String autor, int estoque, double preco, ArrayList<Avaliacao> avaliacoes, String linkImagem){
         this.titulo = titulo;
         this.sinopse = sinopse;
         this.autor = autor;
@@ -32,6 +32,7 @@ public class Manga {
     public void AtualizarEstoque(int quantidade){
         
     }
+    
     public double CalcularMedia(ArrayList<Object> avaliacoes){
         return 0.00; //temporario
     }
@@ -107,6 +108,5 @@ public class Manga {
     public void setLinkImagem(String linkImagem) {
         this.linkImagem = linkImagem;
     }
-    
     
 }

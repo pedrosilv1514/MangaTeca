@@ -2,14 +2,21 @@ package Classes;
 import java.util.*;
 
 public class Cliente extends Usuario {
-    protected ArrayList<Manga> historicoCompras; //mudar
+    protected ArrayList<Manga> historicoCompras; //mudar depois
     protected ArrayList<Avaliacao> avaliacoes;
     protected CarrinhoDeCompras carrinhoCompras;
     protected Cartao cartao;
     
-    public void Cliente(){
+    public Cliente(){
     }
     
+    public Cliente(String NomeUsuario, String email, String senha, ArrayList<Manga> historicoCompras, ArrayList<Avaliacao> avaliacoes, CarrinhoDeCompras carrinho, Cartao cartao){
+        Cadastrar(NomeUsuario, senha, email);
+        this.historicoCompras = historicoCompras;
+        this.avaliacoes = avaliacoes;
+        this.cartao = cartao;
+        this.carrinhoCompras = carrinho;
+    }
     public void pagar(String senha, double total){
         
     }

@@ -10,20 +10,23 @@ public class Manga {
     protected double preco;
     protected ArrayList<Avaliacao> avaliacoes;
     protected Genero genero;
-    protected ImageIcon imagem;
+    protected String linkImagem;
     protected int id;
     
     public void Manga(){
         
     }
     
-    public Manga(String titulo, String sinopse, String autor, int estoque, double preco, int id){
+    public Manga(String titulo, String sinopse, String autor, int estoque, double preco, int id, ArrayList<Avaliacao> avaliacoes, Genero genero, String linkImagem){
         this.titulo = titulo;
         this.sinopse = sinopse;
         this.autor = autor;
         this.estoque = estoque;
         this.preco = preco;
         this.id = id;
+        this.linkImagem = linkImagem;
+        this.avaliacoes = avaliacoes;
+        this.genero = genero;
     }
     
     public void AtualizarEstoque(int quantidade){
@@ -89,20 +92,20 @@ public class Manga {
         this.genero = genero;
     }
 
-    public ImageIcon getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(ImageIcon imagem) {
-        this.imagem = imagem;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getLinkImagem() {
+        return linkImagem;
+    }
+
+    public void setLinkImagem(String linkImagem) {
+        this.linkImagem = linkImagem;
     }
     
     

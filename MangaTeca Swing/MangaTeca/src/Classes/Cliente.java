@@ -2,10 +2,9 @@ package Classes;
 import java.util.*;
 
 public class Cliente extends Usuario {
-    protected double LimiteConta;
-    protected ArrayList<Object> historicoCompras;
+    protected ArrayList<Manga> historicoCompras; //mudar
     protected ArrayList<Avaliacao> avaliacoes;
-    protected ArrayList<CarrinhoDeCompras> carrinhoCompras;
+    protected CarrinhoDeCompras carrinhoCompras;
     protected Cartao cartao;
     
     public void Cliente(){
@@ -18,19 +17,11 @@ public class Cliente extends Usuario {
     
     }
     
-    public double getLimiteConta() {
-        return LimiteConta;
-    }
-
-    public void setLimiteConta(double LimiteConta) {
-        this.LimiteConta = LimiteConta;
-    }
-
-    public ArrayList<Object> getHistoricoCompras() {
+    public ArrayList<Manga> getHistoricoCompras() {
         return historicoCompras;
     }
 
-    public void setHistoricoCompras(ArrayList<Object> historicoCompras) {
+    public void setHistoricoCompras(ArrayList<Manga> historicoCompras) {
         this.historicoCompras = historicoCompras;
     }
 
@@ -42,11 +33,11 @@ public class Cliente extends Usuario {
         this.avaliacoes = avaliacoes;
     }
 
-    public ArrayList<CarrinhoDeCompras> getCarrinhoCompras() {
+    public CarrinhoDeCompras getCarrinhoCompras() {
         return carrinhoCompras;
     }
 
-    public void setCarrinhoCompras(ArrayList<CarrinhoDeCompras> carrinhoCompras) {
+    public void setCarrinhoCompras(CarrinhoDeCompras carrinhoCompras) {
         this.carrinhoCompras = carrinhoCompras;
     }
 

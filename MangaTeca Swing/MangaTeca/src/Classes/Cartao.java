@@ -10,7 +10,13 @@ public class Cartao implements Pagavel{
     public Cartao(){
         
     }
-
+    
+    public Cartao(long numero, int cvc, String validade){
+        this.numero = numero;
+        this.cvc = cvc;
+        this.validade = validade;
+    }
+    
     public long getNumero() {
         return numero;
     }

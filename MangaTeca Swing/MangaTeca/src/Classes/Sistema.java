@@ -20,13 +20,13 @@ public class Sistema {
             FileWriter writer = new FileWriter(csvUsuarios,StandardCharsets.ISO_8859_1, existe);
             
             if (!existe) {
-                writer.write("NomeUsuario;Email;Senha;HistoricoCompras;Avaliacoes;CarrinhoCompras;Cartao\n");
+                writer.write("NomeUsuario;Email;Senha;HistoricoCompras;Avaliacoes;CarrinhoCompras;Cartao\n");//Escreve o cabeçalho do csv
             }
             
             //Escrever os dados do usuario no formato certo
             if (usuario instanceof Cliente){
                 Cliente cliente = (Cliente) usuario;
-                writer.write(cliente.getNomeUsuario() + ";" + cliente.getEmail() + ";" + cliente.getSenha() + ";" + cliente.getCartao() + ";" + cliente.getHistoricoCompras() + ";" + cliente.getAvaliacoes() + ";" + cliente.getCarrinhoCompras() + "\n");
+                writer.write(cliente.getNomeUsuario() + ";" + cliente.getEmail() + ";" + cliente.getSenha() + ";" + cliente.getHistoricoCompras() + ";" + cliente.getAvaliacoes() + ";" + cliente.getCarrinhoCompras() + ";" + cliente.getCartao() + "\n");
                 writer.flush();
                 writer.close();
             } else if (usuario instanceof Administrador){
@@ -57,10 +57,10 @@ public class Sistema {
                String nomeUsuario = partes[0];
                String email = partes[1];
                String senha = partes[2];
-               String cartao = partes[3];
-               String HistoricoCompras = partes[4];
-               String Avaliacoes = partes[5];
-               String CarrinhoCompras = partes[6];
+               String HistoricoCompras = partes[3];
+               String Avaliacoes = partes[4];
+               String CarrinhoCompras = partes[5];
+               String cartao = partes[6];
                
                //lista.add()
            }
@@ -84,7 +84,7 @@ public class Sistema {
             }
             
             //Escrever os dados do mangá no formato certo
-                writer.write("\n");
+                writer.write(manga.getId() + ";" + manga.getTitulo() + ";" + manga.getSinopse() + ";" + manga.getGenero() + ";" + manga.getAutor() + ";" + manga.getEstoque() + ";" + manga.getPreco() + ";" + manga.getAvaliacoes() + ";" + manga.getLinkImagem() + "\n");
                 writer.flush();
                 writer.close();  
         } catch (IOException e) {
@@ -110,7 +110,13 @@ public class Sistema {
                 int id = Integer.parseInt(partes[0]);
                 String titulo = partes[1];
                 String sinopse = partes[2];
-                String genero = partes[3];
+                if (partes[3].equals("Romance")){
+                    Romance genero = new Romance(partes[3]);
+                } else if (partes[3].equals("Acao")){
+                    Acao genero = new Acao(partes[3]);
+                } else if (partes[3].equals("Comedia")){
+                    Comedia genero = new Comedia(partes[3]);
+                }
                 String autor = partes[4];
                 int estoque = Integer.parseInt(partes[5]);
                 double preco = Double.parseDouble(partes[6]);
@@ -118,6 +124,7 @@ public class Sistema {
                 String imagem = partes[8];
                 
                 //lista.add();
+                reader.close();
             }
         } catch (IOException e) {
             e.printStackTrace();

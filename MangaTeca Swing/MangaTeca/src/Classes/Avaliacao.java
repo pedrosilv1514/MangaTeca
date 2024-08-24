@@ -63,7 +63,7 @@ public class Avaliacao {
 
     @Override
     public String toString() {
-        return "Avaliacao{" + "nota=" + nota + ", comentario=" + comentario + ", data=" + data + ", cliente=" + cliente + ", manga=" + manga + '}';
+        return "{" + "nota=" + nota + ", comentario=" + comentario + ", data=" + data + ", cliente=" + cliente + ", manga=" + manga + '}';
     }
     
     

@@ -6,7 +6,7 @@ public class Usuario {
     protected String email;
     protected String senha;
     
-    public void Cadastrar(String NomeUsuario, String senha, String email){
+    public void Cadastrar(String NomeUsuario, String email, String senha){
         this.NomeUsuario = NomeUsuario;
         this.senha = senha;
         this.email = email;
@@ -37,6 +37,11 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    @Override
+    public String toString() {
+        return NomeUsuario;
     }
     
 }

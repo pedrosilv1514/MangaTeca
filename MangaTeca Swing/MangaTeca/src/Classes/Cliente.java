@@ -11,7 +11,7 @@ public class Cliente extends Usuario {
     }
     
     public Cliente(String NomeUsuario, String email, String senha, ArrayList<Manga> historicoCompras, ArrayList<Avaliacao> avaliacoes, CarrinhoDeCompras carrinho, Cartao cartao){
-        Cadastrar(NomeUsuario, senha, email);
+        Cadastrar(NomeUsuario, email, senha);
         this.historicoCompras = historicoCompras;
         this.avaliacoes = avaliacoes;
         this.cartao = cartao;
@@ -55,5 +55,6 @@ public class Cliente extends Usuario {
     public void setCartao(Cartao cartao) {
         this.cartao = cartao;
     }
+    
     
 }

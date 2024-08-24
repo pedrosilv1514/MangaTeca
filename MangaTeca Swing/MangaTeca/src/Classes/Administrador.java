@@ -5,7 +5,8 @@ import java.util.*;
 public class Administrador extends Usuario {
     protected RelatorioDeVendas relatorioDeVendas;
     
-    public Administrador(){
+    public Administrador(String NomeUsuario, String email, String senha){
+    Cadastrar(NomeUsuario, email, senha);
     }
     
     public void adicionarManga(Manga manga){

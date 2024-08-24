@@ -43,7 +43,7 @@ public class CarrinhoDeCompras{
 
     @Override
     public String toString() {
-        return "CarrinhoDeCompras{" + "total=" + total + ", produtos=" + produtos + '}';
+        return "{" + "total=" + total + ", produtos=" + produtos + '}';
     }
     
 }

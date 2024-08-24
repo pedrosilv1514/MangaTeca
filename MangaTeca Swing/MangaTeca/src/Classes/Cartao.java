@@ -5,7 +5,6 @@ public class Cartao implements Pagavel{
     protected long numero;
     protected int cvc;
     protected String validade;
-    protected Cliente cliente;
     
     public Cartao(){
         
@@ -40,14 +39,6 @@ public class Cartao implements Pagavel{
     public void setValidade(String validade) {
         this.validade = validade;
     }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
     
     @Override
     public void realizarPagamento() {
@@ -66,7 +57,7 @@ public class Cartao implements Pagavel{
 
     @Override
     public String toString() {
-        return "Cartao{" + "numero=" + numero + ", cvc=" + cvc + ", validade=" + validade + ", cliente=" + cliente + '}';
+        return "{" + "numero=" + numero + ", cvc=" + cvc + ", validade=" + validade + '}';
     }
     
     

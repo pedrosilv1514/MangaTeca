@@ -11,5 +11,10 @@ public abstract class Genero {
     public String getTipo(){
         return ""; //temporario
     }
+
+    @Override
+    public String toString() {
+        return tipo;
+    }
     
 }

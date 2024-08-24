@@ -39,9 +39,10 @@ public class Pagamento extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(720, 512));
 
         jPanel1.setBackground(new java.awt.Color(23, 23, 23));
         jPanel1.setMinimumSize(new java.awt.Dimension(720, 512));
@@ -50,35 +51,35 @@ public class Pagamento extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/imagem_calendario.png"))); // NOI18N
         jLabel7.setText("jLabel7");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(630, 230, 20, 20);
+        jLabel7.setBounds(630, 270, 20, 20);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/imagem_cartaozinho_1.png"))); // NOI18N
         jLabel6.setText("jLabel6");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(610, 160, 37, 16);
+        jLabel6.setBounds(610, 200, 37, 16);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("CVC");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(340, 200, 40, 25);
+        jLabel4.setBounds(340, 240, 40, 25);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Senha do usuário");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(340, 270, 160, 25);
+        jLabel2.setBounds(340, 310, 160, 25);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Número do Cartão");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(340, 120, 160, 25);
+        jLabel3.setBounds(340, 160, 160, 25);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Cartão.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(71, 101, 168, 264);
+        jLabel1.setBounds(70, 150, 168, 264);
 
         labelSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Olho aberto.png"))); // NOI18N
         labelSenha.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,11 +88,11 @@ public class Pagamento extends javax.swing.JFrame {
             }
         });
         jPanel1.add(labelSenha);
-        labelSenha.setBounds(620, 300, 30, 30);
+        labelSenha.setBounds(620, 340, 30, 30);
 
         txtSenhaCartao.setText("jPasswordField1");
         jPanel1.add(txtSenhaCartao);
-        txtSenhaCartao.setBounds(340, 300, 315, 30);
+        txtSenhaCartao.setBounds(340, 340, 315, 30);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +100,7 @@ public class Pagamento extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField1);
-        jTextField1.setBounds(340, 150, 310, 30);
+        jTextField1.setBounds(340, 190, 310, 30);
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +108,7 @@ public class Pagamento extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField2);
-        jTextField2.setBounds(340, 230, 119, 22);
+        jTextField2.setBounds(340, 270, 119, 22);
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,13 +116,13 @@ public class Pagamento extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField3);
-        jTextField3.setBounds(550, 230, 100, 22);
+        jTextField3.setBounds(550, 270, 100, 22);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Validade");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(550, 200, 80, 25);
+        jLabel5.setBounds(570, 240, 80, 25);
 
         jButton1.setBackground(new java.awt.Color(218, 0, 55));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -133,18 +134,28 @@ public class Pagamento extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(420, 370, 160, 40);
+        jButton1.setBounds(420, 410, 160, 40);
 
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("TESTE");
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/return.png"))); // NOI18N
+        jLabel8.setText("jLabel8");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(410, 470, 37, 16);
+        jLabel8.setBounds(20, 70, 40, 29);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Voltar");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(60, 70, 60, 20);
+
+        jLabel10.setText("jLabel10");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(630, 20, 70, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,6 +231,7 @@ public class Pagamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -227,6 +239,7 @@ public class Pagamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

@@ -7,7 +7,7 @@ public class Avaliacao {
     protected String comentario;
     protected LocalDate data;
     protected Cliente cliente;
-    protected Manga manga;
+    protected String manga;
     
     public Avaliacao(){}
     
@@ -53,11 +53,11 @@ public class Avaliacao {
     }
     
 
-    public Manga getManga() {
+    public String getManga() {
         return manga;
     }
 
-    public void setManga(Manga manga) {
+    public void setManga(String manga) {
         this.manga = manga;
     }
 

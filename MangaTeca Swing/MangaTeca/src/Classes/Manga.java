@@ -113,24 +113,6 @@ public class Manga {
     public String toString() {
         return "{id=" + id + ", titulo=" + titulo + ", sinopse=" + sinopse + ", genero=" + genero + ", autor=" + autor + ", estoque=" + estoque + ", preco=" + preco + /**", avaliacoes=" + avaliacoes + **/"}";
     }
-
-    
-    /**@Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Manga{");
-        sb.append("id=").append(id);
-        sb.append(", titulo=").append(titulo);
-        sb.append(", sinopse=").append(sinopse);
-        sb.append(", genero=").append(genero);
-        sb.append(", autor=").append(autor);
-        sb.append(", estoque=").append(estoque);
-        sb.append(", preco=").append(preco);
-        //sb.append(", avaliacoes=").append(avaliacoes);
-        sb.append(", linkImagem=").append(linkImagem);
-        sb.append('}');
-        return sb.toString();
-    }**/
     
     
 }

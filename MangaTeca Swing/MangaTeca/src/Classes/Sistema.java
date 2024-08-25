@@ -106,7 +106,7 @@ public class Sistema {
                     continue;
                 }
                 String[] partes = linha.split(";");
-                
+                ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<>();
                 int id = Integer.parseInt(partes[0]);
                 String titulo = partes[1];
                 String sinopse = partes[2];
@@ -118,14 +118,12 @@ public class Sistema {
                     Comedia genero = new Comedia(partes[3]);
                 }
                 String autor = partes[4];
-                int estoque = Integer.parseInt(partes[5]);
-                double preco = Double.parseDouble(partes[6]);
-                String avaliacoes = partes[7];
-                String imagem = partes[8];
+                System.out.println(partes[7]);
+                ArrayList<Hashtable<String, String>> hashtables = new ArrayList<>();
                 
                 //lista.add();
-                reader.close();
             }
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

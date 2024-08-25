@@ -2,7 +2,7 @@ package Classes;
 import java.util.*;
 
 public class Cliente extends Usuario {
-    protected ArrayList<Manga> historicoCompras; //mudar depois
+    protected ArrayList<Compras> historicoCompras;
     protected ArrayList<Avaliacao> avaliacoes;
     protected CarrinhoDeCompras carrinhoCompras;
     protected Cartao cartao;
@@ -10,9 +10,9 @@ public class Cliente extends Usuario {
     public Cliente(){
     }
     
-    public Cliente(String NomeUsuario, String email, String senha, ArrayList<Manga> historicoCompras, ArrayList<Avaliacao> avaliacoes, CarrinhoDeCompras carrinho, Cartao cartao){
+    public Cliente(String NomeUsuario, String email, String senha, ArrayList<Compras> Compras, ArrayList<Avaliacao> avaliacoes, CarrinhoDeCompras carrinho, Cartao cartao){
         Cadastrar(NomeUsuario, email, senha);
-        this.historicoCompras = historicoCompras;
+        this.historicoCompras = Compras;
         this.avaliacoes = avaliacoes;
         this.cartao = cartao;
         this.carrinhoCompras = carrinho;
@@ -24,12 +24,12 @@ public class Cliente extends Usuario {
     
     }
     
-    public ArrayList<Manga> getHistoricoCompras() {
+    public ArrayList<Compras> getHistoricoCompras() {
         return historicoCompras;
     }
 
-    public void setHistoricoCompras(ArrayList<Manga> historicoCompras) {
-        this.historicoCompras = historicoCompras;
+    public void setHistoricoCompras(ArrayList<Compras> Compras) {
+        this.historicoCompras = Compras;
     }
 
     public ArrayList<Avaliacao> getAvaliacoes() {

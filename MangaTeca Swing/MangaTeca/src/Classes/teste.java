@@ -24,7 +24,6 @@ public class teste {
         produtosCarrinho.add(new Compras(manga2.getId(),5,LocalDate.of(2024, Month.AUGUST, 24)));
         produtosHistorico.add(new Compras(1,2,LocalDate.of(2024, Month.AUGUST, 24)));
         produtosHistorico.add(new Compras(2,5,LocalDate.of(2024, Month.MAY, 25)));
-        System.out.println(produtosHistorico);
         avaliacao.setManga(manga.getTitulo());
         avaliacao2.setManga(manga2.getTitulo());
         avaliacoesComedia.add(avaliacao);

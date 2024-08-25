@@ -134,11 +134,11 @@ public class Sistema {
                 for (Hashtable<String, String> hashtable : hashtables) {
                     Avaliacao avaliacao = new Avaliacao(Integer.parseInt(hashtable.get("nota")),hashtable.get("comentario"),LocalDate.parse(hashtable.get("data")));
                     listaAvaliacoes.add(avaliacao);
-                    System.out.println("Avaliação:\nNota: " + hashtable.get("nota"));
+                   /* System.out.println("Avaliação:\nNota: " + hashtable.get("nota"));
                     System.out.println("Comentário: " + hashtable.get("comentario"));
                     System.out.println("Data: " + hashtable.get("data"));
                     System.out.println("Cliente: " + hashtable.get("cliente"));
-                    System.out.println("Mangá: " + hashtable.get("manga"));
+                    System.out.println("Mangá: " + hashtable.get("manga"));*/
                 }
                 if(partes[3].equals("romance")){
                     Romance romance = new Romance(partes[3]);

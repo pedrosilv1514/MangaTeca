@@ -2,6 +2,7 @@ package Classes;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Sistema {
@@ -101,27 +102,58 @@ public class Sistema {
             String linha;
             boolean primeiraLinha = true;
             while( (linha = reader.readLine()) != null){
-                if (primeiraLinha) {
+                if (primeiraLinha) { //se for a primeira linha, será o cabeçalho do arquivo e portanto será pulado
                     primeiraLinha = false;
                     continue;
                 }
-                String[] partes = linha.split(";");
+                String[] partes = linha.split(";"); //linha separada por ;
                 ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<>();
                 int id = Integer.parseInt(partes[0]);
                 String titulo = partes[1];
                 String sinopse = partes[2];
-                if (partes[3].equals("Romance")){
-                    Romance genero = new Romance(partes[3]);
-                } else if (partes[3].equals("Acao")){
-                    Acao genero = new Acao(partes[3]);
-                } else if (partes[3].equals("Comedia")){
-                    Comedia genero = new Comedia(partes[3]);
-                }
                 String autor = partes[4];
-                System.out.println(partes[7]);
-                ArrayList<Hashtable<String, String>> hashtables = new ArrayList<>();
+                int estoque = Integer.parseInt(partes[5]);
+                double preco = Double.parseDouble(partes[6]);
+                String avaliacoes = partes[7];
+                String linkImagem = partes[8];
+                avaliacoes = avaliacoes.substring(1, avaliacoes.length() - 1); // Remove os colchetes iniciais e finais
+                String[] parts = avaliacoes.split("(?<=\\}),\\s(?=\\{)"); // Divide em partes, separando por { e }
+                ArrayList<Hashtable<String, String>> hashtables = new ArrayList<>(); //arraylist que vai ter hashtables das avaliações
+                for (String part : parts) {
+                    part = part.trim(); // Remove espaços em branco extras
+                    part = part.substring(1, part.length() - 1);// Remove colchetes de cada parte
+                    Hashtable<String, String> hashtable = new Hashtable<>();// Converte a string para um Hashtable
+                    String[] keyValuePairs = part.split(",\\s*");//vai separar os valores da string por virgula
+                    for (String pair : keyValuePairs) {
+                        String[] keyValue = pair.split("=");
+                        hashtable.put(keyValue[0].trim(), keyValue[1].trim());
+                    }
+                    hashtables.add(hashtable);
+                    
+                }
+                for (Hashtable<String, String> hashtable : hashtables) {
+                    Avaliacao avaliacao = new Avaliacao(Integer.parseInt(hashtable.get("nota")),hashtable.get("comentario"),LocalDate.parse(hashtable.get("data")));
+                    listaAvaliacoes.add(avaliacao);
+                    System.out.println("Avaliação:\nNota: " + hashtable.get("nota"));
+                    System.out.println("Comentário: " + hashtable.get("comentario"));
+                    System.out.println("Data: " + hashtable.get("data"));
+                    System.out.println("Cliente: " + hashtable.get("cliente"));
+                    System.out.println("Mangá: " + hashtable.get("manga"));
+                }
+                if(partes[3].equals("romance")){
+                    Romance romance = new Romance(partes[3]);
+                    Manga manga = new Manga(id,titulo,sinopse,romance,autor,estoque,preco,listaAvaliacoes,linkImagem);  
+                    System.out.println(manga);
+                } else if (partes[3].equals("comedia")){
+                    Comedia comedia = new Comedia(partes[3]);
+                    Manga manga = new Manga(id,titulo,sinopse,comedia,autor,estoque,preco,listaAvaliacoes,linkImagem);
+                    System.out.println(manga);
+                } else if (partes[3].equals("acao")){
+                    Acao acao = new Acao(partes[3]);
+                    Manga manga = new Manga(id,titulo,sinopse,acao,autor,estoque,preco,listaAvaliacoes,linkImagem);
+                    System.out.println(manga);
+                }
                 
-                //lista.add();
             }
             reader.close();
         } catch (IOException e) {

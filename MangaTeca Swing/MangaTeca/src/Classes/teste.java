@@ -7,7 +7,7 @@ public class teste {
     public static void main(String[] args) {
         ArrayList<Manga> produtos = new ArrayList<>();
         ArrayList<Avaliacao> avaliacoes = new ArrayList<>();
-        Avaliacao avaliacao = new Avaliacao(10, "muito bom", LocalDate.of(2024, Month.AUGUST, 24));
+        Avaliacao avaliacao = new Avaliacao(10, "muito bom, adorei o sistema de", LocalDate.of(2024, Month.AUGUST, 24));
         Romance romance = new Romance("romance");
         Manga manga2 = new Manga(1, "Nisekoi", "Chitoge Kirisaki", romance, "Gege Akutami", 10, 29.99, avaliacoes, "https://m.media-amazon.com/images/I/81TmHlRleJL._AC_UF894,1000_QL80_.jpg");
         CarrinhoDeCompras carrinho = new CarrinhoDeCompras(24.99, produtos);
@@ -22,8 +22,8 @@ public class teste {
         //Administrador admin = new Administrador("robertinho","Robertinho@gmail.com","Adm123");
         //Sistema.AdicionarUsuario(admin);
         //Sistema.AdicionarUsuario(cliente);
+        //Sistema.AdicionarManga(manga2);
         Sistema.ListarMangas();
-        //Sistema.AdicionarManga(manga);
         
     }
 }

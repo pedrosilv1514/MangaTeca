@@ -111,7 +111,7 @@ public class Manga {
 
     @Override
     public String toString() {
-        return "{id=" + id + ", titulo=" + titulo + ", sinopse=" + sinopse + ", genero=" + genero + ", autor=" + autor + ", estoque=" + estoque + ", preco=" + preco + /**", avaliacoes=" + avaliacoes + **/"}";
+        return "{id=" + id + ", titulo=" + titulo + ", sinopse=" + sinopse + ", genero=" + genero + ", autor=" + autor + ", estoque=" + estoque + ", preco=" + preco + ", avaliacoes=" + avaliacoes + ", linkImagem=" + linkImagem + "}";
     }
     
     

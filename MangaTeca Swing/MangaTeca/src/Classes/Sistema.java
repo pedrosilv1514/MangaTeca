@@ -53,15 +53,42 @@ public class Sistema {
                if (primeiraLinha) {
                    primeiraLinha = false;
                    continue;
-               }
-               String[] partes = linha.split(";");
-               String nomeUsuario = partes[0];
-               String email = partes[1];
-               String senha = partes[2];
-               String HistoricoCompras = partes[3];
-               String Avaliacoes = partes[4];
-               String CarrinhoCompras = partes[5];
-               String cartao = partes[6];
+                }
+                String[] partes = linha.split(";");
+                String nomeUsuario = partes[0];
+                String email = partes[1];
+                String senha = partes[2];
+                String historicoCompras = partes[3];
+                String avaliacoes = partes[4];
+                String carrinhoCompras = partes[5];
+                String[] partesCarrinho = carrinhoCompras.split("(?<=\\}),\\s(?=\\{)"); // Divide em partes, separando por { e }
+                ArrayList<Hashtable<String, String>> hashtablesCarrinho = new ArrayList<>();
+                for (String part : partesCarrinho) {
+                    part = part.trim(); // Remove espaços em branco extras
+                    part = part.substring(1, part.length() - 1);// Remove colchetes de cada parte
+                    Hashtable<String, String> hashtableCarrinho = new Hashtable<>();// Converte a string para um Hashtable
+                    String[] keyValuePairs = part.split(",\\s*");//vai separar os valores da string por virgula
+                    for (String pair : keyValuePairs) {
+                        String[] keyValue = pair.split("=");
+                        hashtableCarrinho.put(keyValue[0].trim(), keyValue[1].trim());
+                    }
+                    System.out.println(hashtableCarrinho);
+                    hashtablesCarrinho.add(hashtableCarrinho);// NÃO TÁ DANDO CERTO, TEM QUE REFAZER
+                    
+                }
+                String cartao = partes[6];
+                cartao = cartao.substring(1, cartao.length()-1);
+                Hashtable<String, String> cartaoHashtable = new Hashtable<>();
+                String[] pares = cartao.split(", ");
+                for (String par : pares){
+                    String[] keyValue = par.split("=");
+                    String key = keyValue[0];
+                    String value = keyValue[1];
+                    cartaoHashtable.put(key,value);
+                }
+                //System.out.println(cartaoHashtable.get("numero"));
+                //System.out.println(cartaoHashtable.get("cvc"));
+                //System.out.println(cartaoHashtable.get("validade"));
                
                //lista.add()
            }

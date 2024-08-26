@@ -36,11 +36,12 @@ public class teste {
         avaliacao2.setCliente(cliente2);
         
         //Sistema.AdicionarUsuario(admin);
-        Sistema.AdicionarUsuario(cliente);
-        Sistema.AdicionarUsuario(cliente2);
+        //Sistema.AdicionarUsuario(cliente);
+        //Sistema.AdicionarUsuario(cliente2);
         //Sistema.AdicionarManga(manga);
         //Sistema.AdicionarManga(manga2);
         //Sistema.ListarMangas();
+        Sistema.ListarUsuarios();
         
     }
 }

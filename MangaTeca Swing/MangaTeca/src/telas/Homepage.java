@@ -27,11 +27,11 @@ public class Homepage extends javax.swing.JFrame {
         initComponents();
         URL url = new URL("https://imgsrv.crunchyroll.com/cdn-cgi/image/fit=contain,format=auto,quality=85,width=480,height=720/catalog/crunchyroll/cbb55a6382682bf71e91f685c6473c5a.jpg");
         ImageIcon iconOriginal = new ImageIcon(url);
-        int larguraNova = 120;
-        int alturaNova = 180;
+        int larguraNova = 220;
+        int alturaNova = 150;
         Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
         ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
-        lblMangaTop1.setIcon(iconRedimensionado);
+        labelManga1.setIcon(iconRedimensionado);
     }
 
     /**
@@ -50,9 +50,12 @@ public class Homepage extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        lblMangaTop2 = new javax.swing.JLabel();
-        lblMangaTop3 = new javax.swing.JLabel();
-        lblMangaTop1 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        labelManga1 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        labelManga2 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        labelmanga3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Homepage");
@@ -139,32 +142,53 @@ public class Homepage extends javax.swing.JFrame {
         telaInicial.add(jTextField1);
         jTextField1.setBounds(10, 70, 700, 22);
 
-        lblMangaTop2.setForeground(new java.awt.Color(255, 255, 255));
-        lblMangaTop2.setText("MANGA 2");
-        lblMangaTop2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblMangaTop2MouseEntered(evt);
-            }
-        });
-        telaInicial.add(lblMangaTop2);
-        lblMangaTop2.setBounds(130, 130, 60, 16);
+        labelManga1.setText("jLabel1");
 
-        lblMangaTop3.setForeground(new java.awt.Color(255, 255, 255));
-        lblMangaTop3.setText("MANGA 3");
-        telaInicial.add(lblMangaTop3);
-        lblMangaTop3.setBounds(540, 130, 60, 16);
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelManga1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelManga1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+        );
 
-        lblMangaTop1.setForeground(new java.awt.Color(255, 255, 255));
-        lblMangaTop1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblMangaTop1MouseEntered(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblMangaTop1MousePressed(evt);
-            }
-        });
-        telaInicial.add(lblMangaTop1);
-        lblMangaTop1.setBounds(220, 120, 260, 200);
+        telaInicial.add(jPanel5);
+        jPanel5.setBounds(10, 110, 220, 150);
+
+        labelManga2.setText("jLabel2");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelManga2, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelManga2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+        );
+
+        telaInicial.add(jPanel6);
+        jPanel6.setBounds(250, 110, 220, 150);
+
+        labelmanga3.setText("jLabel1");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelmanga3, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelmanga3, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+        );
+
+        telaInicial.add(jPanel7);
+        jPanel7.setBounds(490, 110, 220, 150);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,18 +212,6 @@ public class Homepage extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void lblMangaTop1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMangaTop1MousePressed
-
-    }//GEN-LAST:event_lblMangaTop1MousePressed
-
-    private void lblMangaTop1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMangaTop1MouseEntered
-        lblMangaTop1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_lblMangaTop1MouseEntered
-
-    private void lblMangaTop2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMangaTop2MouseEntered
-
-    }//GEN-LAST:event_lblMangaTop2MouseEntered
 
     /**
      * @param args the command line arguments
@@ -246,10 +258,13 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lblMangaTop1;
-    private javax.swing.JLabel lblMangaTop2;
-    private javax.swing.JLabel lblMangaTop3;
+    private javax.swing.JLabel labelManga1;
+    private javax.swing.JLabel labelManga2;
+    private javax.swing.JLabel labelmanga3;
     private javax.swing.JPanel telaInicial;
     // End of variables declaration//GEN-END:variables
 }

@@ -33,6 +33,7 @@ public class CarrinhoCompras extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtConfirmaLogin = new javax.swing.JToggleButton();
+        txtConfirmaLogin1 = new javax.swing.JToggleButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -79,10 +80,20 @@ public class CarrinhoCompras extends javax.swing.JFrame {
         txtConfirmaLogin.setBackground(new java.awt.Color(218, 0, 55));
         txtConfirmaLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         txtConfirmaLogin.setForeground(new java.awt.Color(237, 237, 237));
-        txtConfirmaLogin.setText("Comprar");
+        txtConfirmaLogin.setText("Esvaziar Carrinho");
         txtConfirmaLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtConfirmaLoginActionPerformed(evt);
+            }
+        });
+
+        txtConfirmaLogin1.setBackground(new java.awt.Color(218, 0, 55));
+        txtConfirmaLogin1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtConfirmaLogin1.setForeground(new java.awt.Color(237, 237, 237));
+        txtConfirmaLogin1.setText("Comprar");
+        txtConfirmaLogin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConfirmaLogin1ActionPerformed(evt);
             }
         });
 
@@ -102,7 +113,10 @@ public class CarrinhoCompras extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txtConfirmaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtConfirmaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtConfirmaLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -114,9 +128,11 @@ public class CarrinhoCompras extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                .addComponent(txtConfirmaLogin1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtConfirmaLogin)
-                .addGap(52, 52, 52))
+                .addGap(12, 12, 12))
         );
 
         jPanel1.add(jPanel3);
@@ -209,6 +225,10 @@ public class CarrinhoCompras extends javax.swing.JFrame {
         //apenas testando
     }//GEN-LAST:event_txtConfirmaLoginActionPerformed
 
+    private void txtConfirmaLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLogin1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtConfirmaLogin1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -252,13 +272,12 @@ public class CarrinhoCompras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JToggleButton txtConfirmaLogin;
+    private javax.swing.JToggleButton txtConfirmaLogin1;
     // End of variables declaration//GEN-END:variables
 }

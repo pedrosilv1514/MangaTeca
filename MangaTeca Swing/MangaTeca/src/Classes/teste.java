@@ -31,17 +31,17 @@ public class teste {
         avaliacoesAcao.add(avaliacao3);
         
         Cliente cliente = new Cliente("Eduardo", "eduardopsousa28@gmail.com", "MrBombastic.2024", produtosHistorico, avaliacoesAcao, new CarrinhoDeCompras(45.98, produtosCarrinho), new Cartao(123456789, 123, "25/10/2004"));
-        avaliacao.setCliente(cliente);
         Cliente cliente2 = new Cliente("Pedro", "pedrinreidelas@gmail.com", "MikeMaluco.2024", produtosHistorico, avaliacoesComedia, new CarrinhoDeCompras(45.98, produtosCarrinho), new Cartao(987654321, 321, "28/10/2005"));
-        avaliacao2.setCliente(cliente2);
+        avaliacao.setCliente(cliente2);
+        avaliacao2.setCliente(cliente);
         
         //Sistema.AdicionarUsuario(admin);
-        //Sistema.AdicionarUsuario(cliente);
-        //Sistema.AdicionarUsuario(cliente2);
+        Sistema.AdicionarUsuario(cliente);
+        Sistema.AdicionarUsuario(cliente2);
         //Sistema.AdicionarManga(manga);
         //Sistema.AdicionarManga(manga2);
         //Sistema.ListarMangas();
-        Sistema.ListarUsuarios();
+        //Sistema.ListarUsuarios();
         
     }
 }

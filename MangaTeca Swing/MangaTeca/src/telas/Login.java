@@ -1,5 +1,10 @@
 package telas;
 
+import java.io.*;
+import Classes.Sistema;
+import Classes.Cliente;
+import javax.swing.*;
+
 /**
  *
  * @author eduar
@@ -99,11 +104,32 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaLoginActionPerformed
 
     private void txtConfirmaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLoginActionPerformed
-        //apenas testando
-        String texto = txtSenhaLogin.getText();
-        System.out.println(texto);
-        String texto2 = txtEmailLogin.getText();
-        System.out.println(texto2);
+        String txtEmail = txtEmailLogin.getText();
+        String txtSenha = txtSenhaLogin.getText();
+        try {
+           BufferedReader reader = new BufferedReader(new FileReader("./dados/Usuarios.csv"));
+           String linha;
+           boolean primeiraLinha = true;
+            while( (linha = reader.readLine()) != null){
+               if (primeiraLinha) {
+                   primeiraLinha = false;
+                   continue;
+                }
+               String[] partes = linha.split(";");
+               String nome = partes[0];
+               String email = partes[1];
+               String senha = partes[2];
+               if(email.equals(txtEmail) && senha.equals(txtSenha)){
+                   JOptionPane.showMessageDialog(null, "Bem vindo(a), " + nome,"Sucesso", JOptionPane.INFORMATION_MESSAGE);
+               } else if (email.equals(txtEmail) && !senha.equals(txtSenha)){
+                   JOptionPane.showMessageDialog(null, "Sua senha está incorreta, tente novamente.","Falha ao fazer login", JOptionPane.ERROR_MESSAGE);
+               } else {
+                   JOptionPane.showMessageDialog(null,"Este usuário não está cadastrado no sistema.","Falha ao fazer login", JOptionPane.INFORMATION_MESSAGE);
+               }
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_txtConfirmaLoginActionPerformed
 
     /**

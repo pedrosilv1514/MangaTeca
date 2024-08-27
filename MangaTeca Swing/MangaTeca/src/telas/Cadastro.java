@@ -2,6 +2,7 @@ package telas;
 import Classes.Cliente;
 import Classes.Sistema;
 import Classes.Usuario;
+import java.io.*;
 import telas.TelaPrincipal;
 import java.util.*;
 import javax.swing.*;
@@ -141,26 +142,14 @@ public class Cadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtConfirmaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaCadastroActionPerformed
-        String texto3 = txtEmailCadastro.getText();
-        if (texto3.contains("@")){
-            Cliente novoCliente = new Cliente();
-            String texto = txtSenhaCadastro.getText();
-            System.out.println(texto);
-            String texto2 = txtUsuarioCadastro.getText();
-            System.out.println(texto2);
-            novoCliente.setEmail(texto3);
-            novoCliente.setNomeUsuario(texto2);
-            novoCliente.setSenha(texto);
-            JOptionPane.showMessageDialog(null, "Novo usuário cadastrado:" + texto2,"Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            Sistema.addUsuario(novoCliente);
-            for (Usuario u : Sistema.getUsuarios()) {
-                System.out.println(u);
-            }
+        String txtEmail = txtEmailCadastro.getText();
+        String txtUser = txtUsuarioCadastro.getText();
+        String txtSenha = txtSenhaCadastro.getText();
+        if(txtEmail.equals("")||txtUser.equals("")||txtSenha.equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de continuar." ,"Erro ao cadastrar", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Insira um e-mail válido!" ,"Erro ao cadastrar", JOptionPane.ERROR_MESSAGE);
+            Usuario.Cadastrar(txtUser, txtEmail, txtSenha);  
         }
-        //funciona uhu
-        
     }//GEN-LAST:event_txtConfirmaCadastroActionPerformed
 
     private void txtSenhaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaCadastroActionPerformed

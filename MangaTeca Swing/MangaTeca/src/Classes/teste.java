@@ -9,9 +9,9 @@ public class teste {
         ArrayList<Compras> produtosHistorico = new ArrayList<>();
         ArrayList<Avaliacao> avaliacoesComedia = new ArrayList<>();
         ArrayList<Avaliacao> avaliacoesAcao = new ArrayList<>();
-        Romance romance = new Romance("romance");
-        Acao acao = new Acao("acao");
-        Comedia comedia = new Comedia("comedia");
+        Romance romance = new Romance("Romance");
+        Acao acao = new Acao("Acao");
+        Comedia comedia = new Comedia("Comedia");
         
         Administrador admin = new Administrador("Admin","Admin@gmail.com","Adm123");
         Avaliacao avaliacao = new Avaliacao(10, "Muito bom morri de rir", LocalDate.of(2024, Month.AUGUST, 24));

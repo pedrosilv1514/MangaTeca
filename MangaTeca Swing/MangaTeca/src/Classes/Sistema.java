@@ -100,7 +100,8 @@ public class Sistema {
     }
     
     public static ArrayList<Manga> ListarMangas(){
-        ArrayList<Manga> lista = new ArrayList<>();
+        //ArrayList<Manga> lista = new ArrayList<>();
+        ArrayList<Manga> mangas = new ArrayList<>();
         
         try {
             //Abrir o leitor
@@ -146,18 +147,21 @@ public class Sistema {
                     System.out.println("Cliente: " + hashtable.get("cliente"));
                     System.out.println("Mangá: " + hashtable.get("manga"));*/
                 }
-                if(partes[3].equals("romance")){
+                if(partes[3].equals("Romance")){
                     Romance romance = new Romance(partes[3]);
                     Manga manga = new Manga(id,titulo,sinopse,romance,autor,estoque,preco,listaAvaliacoes,linkImagem);  
                     System.out.println(manga);
-                } else if (partes[3].equals("comedia")){
+                    mangas.add(manga);
+                } else if (partes[3].equals("Comedia")){
                     Comedia comedia = new Comedia(partes[3]);
                     Manga manga = new Manga(id,titulo,sinopse,comedia,autor,estoque,preco,listaAvaliacoes,linkImagem);
                     System.out.println(manga);
-                } else if (partes[3].equals("acao")){
+                    mangas.add(manga);
+                } else if (partes[3].equals("Acao")){
                     Acao acao = new Acao(partes[3]);
                     Manga manga = new Manga(id,titulo,sinopse,acao,autor,estoque,preco,listaAvaliacoes,linkImagem);
                     System.out.println(manga);
+                    mangas.add(manga);
                 }
                 
             }
@@ -165,7 +169,7 @@ public class Sistema {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return lista;
+        return mangas;
     }
     
     public Sistema(ArrayList<Usuario> usuarios, ArrayList<Manga> mangas) {

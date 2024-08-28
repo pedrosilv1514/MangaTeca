@@ -1,9 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package telas;
 
+import Classes.Sistema;
+import Classes.Manga;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -15,6 +14,11 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -34,8 +38,30 @@ public class Homepage extends javax.swing.JFrame {
         Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
         ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
         labelManga1.setIcon(iconRedimensionado);
-    }
+        
+        //Teste para a leitura do csv e adicionamento ao jTable1
+        ArrayList<Manga> listaMangas = Sistema.ListarMangas();
 
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Título");
+        model.addColumn("Gênero");
+        model.addColumn("Autor");
+        model.addColumn("Preço");
+
+        for (Manga manga : listaMangas) {
+            model.addRow(new Object[]{
+                manga.getId(),
+                manga.getTitulo(),
+                manga.getGenero().getTipo(),
+                manga.getAutor(),
+                manga.getPreco()
+            });
+        }
+        
+        jTable1.setModel(model);
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,6 +77,7 @@ public class Homepage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         labelManga1 = new javax.swing.JLabel();
@@ -60,6 +87,7 @@ public class Homepage extends javax.swing.JFrame {
         labelmanga3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Homepage");
@@ -110,6 +138,13 @@ public class Homepage extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        jButton2.setText("Carrinho");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -119,7 +154,9 @@ public class Homepage extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 343, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(27, 27, 27)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -128,7 +165,8 @@ public class Homepage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +182,7 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
         telaInicial.add(jTextField1);
-        jTextField1.setBounds(10, 70, 700, 22);
+        jTextField1.setBounds(10, 260, 700, 22);
 
         labelManga1.setText("jLabel1");
 
@@ -160,7 +198,7 @@ public class Homepage extends javax.swing.JFrame {
         );
 
         telaInicial.add(jPanel5);
-        jPanel5.setBounds(10, 110, 220, 150);
+        jPanel5.setBounds(10, 80, 220, 150);
 
         labelManga3.setText("jLabel2");
 
@@ -186,7 +224,7 @@ public class Homepage extends javax.swing.JFrame {
         );
 
         telaInicial.add(jPanel6);
-        jPanel6.setBounds(250, 110, 220, 150);
+        jPanel6.setBounds(250, 80, 220, 150);
 
         labelmanga3.setText("jLabel1");
 
@@ -202,7 +240,7 @@ public class Homepage extends javax.swing.JFrame {
         );
 
         telaInicial.add(jPanel7);
-        jPanel7.setBounds(490, 110, 220, 150);
+        jPanel7.setBounds(490, 80, 220, 150);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,13 +260,19 @@ public class Homepage extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+                "ID", "Titulo", "Genero", "Autor", "Preço"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         telaInicial.add(jScrollPane1);
-        jScrollPane1.setBounds(90, 280, 480, 190);
+        jScrollPane1.setBounds(60, 300, 580, 190);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Procurar Mangás no Acervo");
+        telaInicial.add(jLabel1);
+        jLabel1.setBounds(10, 240, 180, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -252,6 +296,10 @@ public class Homepage extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,6 +341,8 @@ public class Homepage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;

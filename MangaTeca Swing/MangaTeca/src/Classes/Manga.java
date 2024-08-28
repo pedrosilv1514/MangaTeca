@@ -13,7 +13,7 @@ public class Manga {
     protected ArrayList<Avaliacao> avaliacoes;
     protected String linkImagem;
     
-    public void Manga(){
+    public Manga(){
         
     }
     

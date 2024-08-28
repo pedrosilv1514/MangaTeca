@@ -36,33 +36,32 @@ public class Cadastro extends javax.swing.JFrame {
         labelSenha = new javax.swing.JLabel();
         txtSenhaCadastro = new javax.swing.JPasswordField();
         lblEmailCadastro = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(720, 512));
         setSize(new java.awt.Dimension(720, 512));
 
         jPanel1.setBackground(new java.awt.Color(23, 23, 23));
+        jPanel1.setMinimumSize(new java.awt.Dimension(720, 512));
         jPanel1.setPreferredSize(new java.awt.Dimension(720, 512));
         jPanel1.setLayout(null);
 
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Logo MangaTeca Pequena.png"))); // NOI18N
         jPanel1.add(lblTitulo);
-        lblTitulo.setBounds(130, 80, 454, 67);
+        lblTitulo.setBounds(130, 30, 454, 67);
 
         lblUsuarioCadastro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblUsuarioCadastro.setForeground(new java.awt.Color(237, 237, 237));
         lblUsuarioCadastro.setText("Nome de Usuário");
         jPanel1.add(lblUsuarioCadastro);
-        lblUsuarioCadastro.setBounds(130, 230, 200, 32);
+        lblUsuarioCadastro.setBounds(130, 220, 200, 32);
 
         lblSenhaCadastro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblSenhaCadastro.setForeground(new java.awt.Color(237, 237, 237));
         lblSenhaCadastro.setText("Senha");
         jPanel1.add(lblSenhaCadastro);
-        lblSenhaCadastro.setBounds(130, 310, 96, 32);
+        lblSenhaCadastro.setBounds(130, 300, 96, 32);
 
         txtConfirmaCadastro.setBackground(new java.awt.Color(218, 0, 55));
         txtConfirmaCadastro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -74,19 +73,19 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtConfirmaCadastro);
-        txtConfirmaCadastro.setBounds(250, 410, 240, 47);
+        txtConfirmaCadastro.setBounds(250, 400, 240, 47);
 
         txtUsuarioCadastro.setBackground(new java.awt.Color(68, 68, 68));
         txtUsuarioCadastro.setForeground(new java.awt.Color(237, 237, 237));
         txtUsuarioCadastro.setToolTipText("");
         jPanel1.add(txtUsuarioCadastro);
-        txtUsuarioCadastro.setBounds(130, 270, 454, 30);
+        txtUsuarioCadastro.setBounds(130, 260, 454, 30);
 
         txtEmailCadastro.setBackground(new java.awt.Color(68, 68, 68));
         txtEmailCadastro.setForeground(new java.awt.Color(237, 237, 237));
         txtEmailCadastro.setToolTipText("");
         jPanel1.add(txtEmailCadastro);
-        txtEmailCadastro.setBounds(130, 190, 454, 30);
+        txtEmailCadastro.setBounds(130, 180, 454, 30);
 
         labelSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Olho aberto.png"))); // NOI18N
         labelSenha.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,7 +94,7 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
         jPanel1.add(labelSenha);
-        labelSenha.setBounds(550, 350, 30, 40);
+        labelSenha.setBounds(550, 330, 30, 50);
 
         txtSenhaCadastro.setBackground(new java.awt.Color(68, 68, 68));
         txtSenhaCadastro.setForeground(new java.awt.Color(237, 237, 237));
@@ -105,24 +104,13 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtSenhaCadastro);
-        txtSenhaCadastro.setBounds(130, 350, 454, 40);
+        txtSenhaCadastro.setBounds(130, 340, 454, 30);
 
         lblEmailCadastro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblEmailCadastro.setForeground(new java.awt.Color(237, 237, 237));
         lblEmailCadastro.setText("E-mail");
         jPanel1.add(lblEmailCadastro);
-        lblEmailCadastro.setBounds(130, 150, 96, 32);
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Voltar");
-        jPanel1.add(jLabel9);
-        jLabel9.setBounds(70, 40, 60, 20);
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/return.png"))); // NOI18N
-        jLabel8.setText("jLabel8");
-        jPanel1.add(jLabel8);
-        jLabel8.setBounds(30, 40, 40, 29);
+        lblEmailCadastro.setBounds(130, 140, 96, 32);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,7 +134,7 @@ public class Cadastro extends javax.swing.JFrame {
         String txtUser = txtUsuarioCadastro.getText();
         String txtSenha = txtSenhaCadastro.getText();
         if(txtEmail.equals("")||txtUser.equals("")||txtSenha.equals("")){
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de continuar." ,"Erro ao cadastrar", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de continuar." ,"Falha ao cadastrar", JOptionPane.INFORMATION_MESSAGE);
         } else {
             Usuario.Cadastrar(txtUser, txtEmail, txtSenha);  
         }
@@ -203,8 +191,6 @@ public class Cadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelSenha;
     private javax.swing.JLabel lblEmailCadastro;

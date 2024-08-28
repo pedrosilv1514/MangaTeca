@@ -22,6 +22,7 @@ public class Sistema {
             
             if (!existe) {
                 writer.write("NomeUsuario;Email;Senha;HistoricoCompras;Avaliacoes;CarrinhoCompras;Cartao\n");//Escreve o cabeçalho do csv
+                writer.write("Administrador;administradoremail.official@gmail.com;Admin123\n");//Insere o administrador no sistema
             }
             
             //Escrever os dados do usuario no formato certo
@@ -96,28 +97,6 @@ public class Sistema {
                e.printStackTrace();
            }
         return lista;
-    }
-    
-    public static void AdicionarManga(Manga manga){
-        try {
-            //Verificar se o arquivo existe
-            boolean existe = new File(csvMangas).exists();
-            
-            //Abre o escritor para adicionar dados ao arquivo
-            FileWriter writer = new FileWriter(csvMangas, StandardCharsets.ISO_8859_1, existe);
-            
-            if (!existe) {
-                writer.write("Id;Titulo;Sinopse;Gênero;Autor;Estoque;Preco;Avaliacoes;Imagem\n");
-                
-            }
-            
-            //Escrever os dados do mangá no formato certo
-                writer.write(manga.getId() + ";" + manga.getTitulo() + ";" + manga.getSinopse() + ";" + manga.getGenero() + ";" + manga.getAutor() + ";" + manga.getEstoque() + ";" + manga.getPreco() + ";" + manga.getAvaliacoes() + ";" + manga.getLinkImagem() + "\n");
-                writer.flush();
-                writer.close();  
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
     
     public static ArrayList<Manga> ListarMangas(){

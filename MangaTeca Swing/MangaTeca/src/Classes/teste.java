@@ -36,9 +36,10 @@ public class teste {
         avaliacao2.setCliente(cliente);
         
         //Sistema.AdicionarUsuario(admin);
-        Sistema.AdicionarUsuario(cliente);
-        Sistema.AdicionarUsuario(cliente2);
-        //Sistema.AdicionarManga(manga);
+        //Sistema.AdicionarUsuario(cliente);
+        //Sistema.AdicionarUsuario(cliente2);
+        //admin.adicionarManga(manga);
+        //admin.removerManga(manga); NÃO TÁ FUNCIONANDO
         //Sistema.AdicionarManga(manga2);
         //Sistema.ListarMangas();
         //Sistema.ListarUsuarios();

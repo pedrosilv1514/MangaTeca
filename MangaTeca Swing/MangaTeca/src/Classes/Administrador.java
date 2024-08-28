@@ -35,8 +35,32 @@ public class Administrador extends Usuario {
     public void atualizarManga(Manga manga){
         
     }
+    
     public void removerManga(Manga manga){
-        
+        String mangaPraRemover = String.valueOf(manga.getId());
+        String linha;
+        ArrayList<String> linhasRestantes = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("./dados/Mangas.csv"));
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(";");
+                String IdManga = partes[0];
+
+                if (!IdManga.equals(mangaPraRemover)) {
+                    linhasRestantes.add(linha);
+                }
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter("./dados/Mangas.csv"));
+            for (String linhaRestante : linhasRestantes) {
+                writer.write(linhaRestante);  //NÃO TÁ FUNCIONANDO
+                System.out.println(linhaRestante);
+                writer.newLine();
+                writer.flush();
+                writer.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void atualizarEstoque(Manga manga, int novaQuantidade){
         

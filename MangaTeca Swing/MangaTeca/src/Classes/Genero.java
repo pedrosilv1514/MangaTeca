@@ -9,7 +9,7 @@ public abstract class Genero {
     }
     
     public String getTipo(){
-        return ""; //temporario
+        return tipo;
     }
 
     @Override

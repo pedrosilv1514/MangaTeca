@@ -10,6 +10,7 @@ public class Administrador extends Usuario {
     public Administrador(String NomeUsuario, String email, String senha){
     Cadastrar(NomeUsuario, email, senha);
     }
+    public Administrador(){}
     
     public void adicionarManga(Manga manga){
         try {
@@ -32,8 +33,16 @@ public class Administrador extends Usuario {
         }
     }
     
-    public void atualizarManga(Manga manga){
-        
+    public void atualizarManga(Manga manga, Manga mangaAtualizado){
+        String mangaPraAtualizar = String.valueOf(manga.getId());
+        String linha;
+        ArrayList<String> linhasRestantes = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("./dados/Mangas.csv"));
+            //não tá pronto
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
     
     public void removerManga(Manga manga){
@@ -52,12 +61,13 @@ public class Administrador extends Usuario {
             }
             BufferedWriter writer = new BufferedWriter(new FileWriter("./dados/Mangas.csv"));
             for (String linhaRestante : linhasRestantes) {
-                writer.write(linhaRestante);  //NÃO TÁ FUNCIONANDO
+                writer.write(linhaRestante);
                 System.out.println(linhaRestante);
                 writer.newLine();
                 writer.flush();
-                writer.close();
+                
             }
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

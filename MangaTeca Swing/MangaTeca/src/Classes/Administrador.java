@@ -34,12 +34,33 @@ public class Administrador extends Usuario {
     }
     
     public void atualizarManga(Manga manga, Manga mangaAtualizado){
-        String mangaPraAtualizar = String.valueOf(manga.getId());
         String linha;
         ArrayList<String> linhasRestantes = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("./dados/Mangas.csv"));
-            //não tá pronto
+            BufferedReader reader = new BufferedReader(new FileReader("./dados/Mangas.csv",StandardCharsets.ISO_8859_1));
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(";");
+                String IdManga = partes[0];
+                System.out.println(IdManga);
+                if(IdManga.equals(String.valueOf(manga.getId()))){
+                    String mangaNovo = mangaAtualizado.getId() + ";" + mangaAtualizado.getTitulo() + ";" + mangaAtualizado.getSinopse() + ";" + mangaAtualizado.getGenero() + ";" + mangaAtualizado.getAutor() + ";" + mangaAtualizado.getEstoque() + ";" + mangaAtualizado.getPreco() + ";" + mangaAtualizado.getAvaliacoes() + ";" + mangaAtualizado.getLinkImagem();
+                    linhasRestantes.add(mangaNovo);
+                } else {
+                    linhasRestantes.add(linha);
+                }
+            }
+            reader.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("./dados/Mangas.csv",StandardCharsets.ISO_8859_1));
+            for (String linhaRestante : linhasRestantes) {
+                writer.write(linhaRestante);
+                writer.newLine();
+                writer.flush();
+            }
+            writer.close();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -50,7 +71,7 @@ public class Administrador extends Usuario {
         String linha;
         ArrayList<String> linhasRestantes = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("./dados/Mangas.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("./dados/Mangas.csv",StandardCharsets.ISO_8859_1));
             while ((linha = reader.readLine()) != null) {
                 String[] partes = linha.split(";");
                 String IdManga = partes[0];
@@ -59,7 +80,7 @@ public class Administrador extends Usuario {
                     linhasRestantes.add(linha);
                 }
             }
-            BufferedWriter writer = new BufferedWriter(new FileWriter("./dados/Mangas.csv"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("./dados/Mangas.csv",StandardCharsets.ISO_8859_1));
             for (String linhaRestante : linhasRestantes) {
                 writer.write(linhaRestante);
                 System.out.println(linhaRestante);
@@ -73,8 +94,39 @@ public class Administrador extends Usuario {
         }
     }
     public void atualizarEstoque(Manga manga, int novaQuantidade){
+        String mangaEstoque= String.valueOf(manga.getId());
+        String linha;
+        ArrayList<String> linhasRestantes = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("./dados/Mangas.csv",StandardCharsets.ISO_8859_1));
+            while ((linha = reader.readLine()) != null) {
+            String[] partes = linha.split(";");
+            String idManga = partes[0];
+            if(idManga.equals(mangaEstoque)){
+                partes[5] = String.valueOf(novaQuantidade);
+                String mangasString = String.join(";", partes);
+                linhasRestantes.add(mangasString);
+            } else {
+                linhasRestantes.add(linha);
+            }
+            }
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("./dados/Mangas.csv",StandardCharsets.ISO_8859_1));
+            for (String linhaRestante : linhasRestantes) {
+                writer.write(linhaRestante);
+                writer.newLine();
+                writer.flush();
+            }
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
         
     }
+    
     public void moderarAvaliacao(Avaliacao avaliacao){
         
     }

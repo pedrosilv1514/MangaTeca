@@ -9,17 +9,18 @@ public class teste {
         ArrayList<Compras> produtosHistorico = new ArrayList<>();
         ArrayList<Avaliacao> avaliacoesComedia = new ArrayList<>();
         ArrayList<Avaliacao> avaliacoesAcao = new ArrayList<>();
+        ArrayList<Avaliacao> avaliacoesRomance = new ArrayList<>();
         Romance romance = new Romance("Romance");
         Acao acao = new Acao("Acao");
         Comedia comedia = new Comedia("Comedia");
         
         Administrador admin = new Administrador();
-        Avaliacao avaliacao = new Avaliacao(10, "Muito bom morri de rir", LocalDate.of(2024, Month.AUGUST, 24));
-        Avaliacao avaliacao2 = new Avaliacao(7, "You are my special", LocalDate.of(2024, Month.AUGUST, 25));
-        Avaliacao avaliacao3 = new Avaliacao(5, "Superestimado.", LocalDate.of(2024, Month.AUGUST, 24));
-        Manga manga = new Manga(1, "Azumanga Daioh!", "Osaka", comedia, "Kiyohiko Azuma", 10, 16.99, avaliacoesComedia, "https://cdn.myanimelist.net/images/manga/2/259651.jpg");
+        Avaliacao avaliacao = new Avaliacao(10, "Muito bom morri de rir", LocalDate.of(2024, Month.AUGUST, 24)); avaliacoesComedia.add(avaliacao);
+        Avaliacao avaliacao2 = new Avaliacao(7, "You are my special", LocalDate.of(2024, Month.AUGUST, 25)); avaliacoesAcao.add(avaliacao2);
+        Avaliacao avaliacao3 = new Avaliacao(11, "Daddy Daddy do", LocalDate.of(2024, Month.AUGUST, 23)); avaliacoesRomance.add(avaliacao3);
+        Manga manga = new Manga(1, "Azumanga Daioh2!", "Osaka", comedia, "Kiyohiko Azuma", 10, 16.99, avaliacoesComedia, "https://cdn.myanimelist.net/images/manga/2/259651.jpg");
         Manga manga2 = new Manga(2, "Jujutsu Kaisen", "Itadori", acao, "Gege Akutami", 7, 29.99, avaliacoesAcao, "https://cdn.myanimelist.net/images/manga/3/210341l.jpg");
-        
+        Manga manga3 = new Manga(3, "Kaguya Sama: Love is War", "Kaguya", romance, "Aka Akasaka", 11, 19.99, avaliacoesRomance, "https://cdn.myanimelist.net/images/manga/3/188896.jpg");
         /*produtosCarrinho.add(new Compras(manga.getId(),2,LocalDate.of(2024, Month.AUGUST, 24)));
         produtosCarrinho.add(new Compras(manga2.getId(),5,LocalDate.of(2024, Month.AUGUST, 24)));
         produtosHistorico.add(new Compras(1,2,LocalDate.of(2024, Month.AUGUST, 24)));
@@ -39,10 +40,11 @@ public class teste {
         //Sistema.AdicionarUsuario(cliente);
         //Sistema.AdicionarUsuario(cliente2);
         //admin.adicionarManga(manga);
-        //admin.adicionarManga(manga);
         //admin.adicionarManga(manga2);
+        //admin.adicionarManga(manga3);
+        //admin.atualizarManga(manga2, manga2);
+        //admin.atualizarEstoque(manga, 100);
         //admin.removerManga(manga);
-        //Sistema.AdicionarManga(manga2);
         //Sistema.ListarMangas();
         //Sistema.ListarUsuarios();
         

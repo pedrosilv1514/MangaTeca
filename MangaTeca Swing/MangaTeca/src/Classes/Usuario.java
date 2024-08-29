@@ -23,9 +23,8 @@ public class Usuario {
                 writer.write("NomeUsuario;Email;Senha;HistoricoCompras;Avaliacoes;CarrinhoCompras;Cartao\n");//Escreve o cabeçalho do csv
                 writer.write("Administrador;administradoremail.official@gmail.com;Admin123\n");//Insere o administrador no sistema
                 writer.flush();
-                writer.close();
             }
-            BufferedReader reader = new BufferedReader(new FileReader("./dados/Usuarios.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("./dados/Usuarios.csv",StandardCharsets.ISO_8859_1));
             String linha;
             boolean primeiraLinha = true;
             while( (linha = reader.readLine()) != null){
@@ -55,6 +54,7 @@ public class Usuario {
                 cliente.setSenha(senha);
                 Sistema.AdicionarUsuario(cliente);
                 JOptionPane.showMessageDialog(null, "Novo usuário cadastrado:" + NomeUsuario,"Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                writer.close();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário ou E-mail já está cadastrado no sistema." ,"Falha ao cadastrar", JOptionPane.INFORMATION_MESSAGE);
@@ -72,7 +72,7 @@ public class Usuario {
            if (!existe) {
                JOptionPane.showMessageDialog(null, "Não há nenhum usuário cadastrado no sistema, realize seu cadastro antes de acessar o aplicativo!","Falha ao logar", JOptionPane.INFORMATION_MESSAGE);
            } else {
-           BufferedReader reader = new BufferedReader(new FileReader("./dados/Usuarios.csv"));
+           BufferedReader reader = new BufferedReader(new FileReader("./dados/Usuarios.csv",StandardCharsets.ISO_8859_1));
            String linha;
            boolean primeiraLinha = true;
             while( (linha = reader.readLine()) != null){

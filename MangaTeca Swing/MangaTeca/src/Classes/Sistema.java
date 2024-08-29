@@ -56,6 +56,12 @@ public class Sistema {
                    continue;
                 }
                 String[] partes = linha.split(";");
+                if(partes.length == 3){
+                    String nomeUsuario = partes[0];
+                    String email = partes[1];
+                    String senha = partes[2];
+                    lista.add(new Administrador(nomeUsuario,email,senha));
+                } else {
                 String nomeUsuario = partes[0];
                 String email = partes[1];
                 String senha = partes[2];
@@ -90,8 +96,7 @@ public class Sistema {
                 //System.out.println(cartaoHashtable.get("numero"));
                 //System.out.println(cartaoHashtable.get("cvc"));
                 //System.out.println(cartaoHashtable.get("validade"));
-               
-               //lista.add()
+                }
            }
        } catch (IOException e) {
                e.printStackTrace();

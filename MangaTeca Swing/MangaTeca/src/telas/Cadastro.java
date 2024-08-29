@@ -11,7 +11,6 @@ import javax.swing.*;
  * @author eduar
  */
 public class Cadastro extends javax.swing.JFrame {
-    Sistema sistema = new Sistema();
     boolean mostra = false;
     public Cadastro() {
         initComponents();

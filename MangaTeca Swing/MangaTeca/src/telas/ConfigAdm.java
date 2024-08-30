@@ -55,11 +55,14 @@ public class ConfigAdm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(820, 612));
 
         jPanel1.setBackground(new java.awt.Color(23, 23, 23));
-        jPanel1.setMinimumSize(new java.awt.Dimension(720, 512));
+        jPanel1.setMinimumSize(new java.awt.Dimension(820, 612));
         jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(68, 68, 68));
@@ -69,7 +72,7 @@ public class ConfigAdm extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(237, 237, 237));
         jLabel6.setText("Administrador");
 
-        jLabel4.setText("IconeUsuario");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/admin.png"))); // NOI18N
 
         jPanel4.setBackground(new java.awt.Color(60, 60, 60));
         jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -115,7 +118,7 @@ public class ConfigAdm extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -123,7 +126,7 @@ public class ConfigAdm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(301, 301, 301)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(302, Short.MAX_VALUE)))
+                    .addContainerGap(402, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,25 +148,25 @@ public class ConfigAdm extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 720, 60);
+        jPanel2.setBounds(0, 0, 820, 60);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(237, 237, 237));
         jLabel2.setText("Sinopse");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(330, 100, 50, 20);
+        jLabel2.setBounds(460, 100, 50, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(237, 237, 237));
         jLabel5.setText("Administrar Mangás");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 60, 250, 40);
+        jLabel5.setBounds(260, 60, 250, 30);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(237, 237, 237));
         jLabel3.setText("Título");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 100, 50, 20);
+        jLabel3.setBounds(10, 100, 40, 20);
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,13 +174,13 @@ public class ConfigAdm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField2);
-        jTextField2.setBounds(20, 120, 260, 22);
+        jTextField2.setBounds(10, 120, 430, 20);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(237, 237, 237));
         jLabel7.setText("Gênero");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(210, 200, 50, 20);
+        jLabel7.setBounds(310, 150, 50, 20);
 
         jTextArea1.setColumns(1);
         jTextArea1.setLineWrap(true);
@@ -186,13 +189,13 @@ public class ConfigAdm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(330, 120, 350, 130);
+        jScrollPane1.setBounds(460, 120, 350, 130);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(237, 237, 237));
         jLabel9.setText("Autor");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(20, 150, 50, 20);
+        jLabel9.setBounds(10, 150, 50, 20);
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,13 +203,13 @@ public class ConfigAdm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField3);
-        jTextField3.setBounds(20, 170, 260, 22);
+        jTextField3.setBounds(10, 170, 260, 22);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(237, 237, 237));
         jLabel10.setText("Preço");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(20, 200, 50, 20);
+        jLabel10.setBounds(10, 200, 50, 20);
 
         jTextField4.setText("R$ 00,00");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +218,7 @@ public class ConfigAdm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField4);
-        jTextField4.setBounds(20, 220, 80, 22);
+        jTextField4.setBounds(10, 220, 80, 22);
 
         txtConfirmaLogin.setBackground(new java.awt.Color(218, 0, 55));
         txtConfirmaLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -227,7 +230,7 @@ public class ConfigAdm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtConfirmaLogin);
-        txtConfirmaLogin.setBounds(480, 270, 170, 40);
+        txtConfirmaLogin.setBounds(520, 270, 170, 40);
 
         txtConfirmaLogin1.setBackground(new java.awt.Color(218, 0, 55));
         txtConfirmaLogin1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -239,7 +242,7 @@ public class ConfigAdm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtConfirmaLogin1);
-        txtConfirmaLogin1.setBounds(20, 270, 170, 40);
+        txtConfirmaLogin1.setBounds(150, 270, 170, 40);
 
         txtConfirmaLogin2.setBackground(new java.awt.Color(218, 0, 55));
         txtConfirmaLogin2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -251,38 +254,61 @@ public class ConfigAdm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtConfirmaLogin2);
-        txtConfirmaLogin2.setBounds(250, 270, 170, 40);
+        txtConfirmaLogin2.setBounds(340, 270, 170, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Azumanga Daioh!", "Kiyohiko Azuma", "Sinopse", "R$ 20,00", "5"}
+
             },
             new String [] {
-                "Título", "Autor", "Sinopse", "Preço", "Estoque"
+                "Id", "Título", "Autor", "Sinopse", "Preço", "Estoque"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(0, 330, 720, 180);
+        jScrollPane2.setBounds(0, 330, 820, 280);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(237, 237, 237));
-        jLabel11.setText("Estoque");
+        jLabel11.setText("Link da Imagem");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(120, 200, 50, 20);
+        jLabel11.setBounds(220, 200, 100, 20);
 
+        jTextField5.setText("100");
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
             }
         });
         jPanel1.add(jTextField5);
-        jTextField5.setBounds(120, 220, 80, 22);
+        jTextField5.setBounds(110, 220, 80, 22);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Romance", "Ação", "Comédia" }));
         jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(210, 220, 90, 22);
+        jComboBox1.setBounds(310, 170, 90, 22);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(220, 220, 210, 22);
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(237, 237, 237));
+        jLabel12.setText("Estoque");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(110, 200, 50, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -331,6 +357,10 @@ public class ConfigAdm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,6 +402,7 @@ public class ConfigAdm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -387,6 +418,7 @@ public class ConfigAdm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

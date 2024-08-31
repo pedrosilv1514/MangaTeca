@@ -20,49 +20,56 @@ public class Usuario {
 
     // Método para cadastrar um novo usuário
     public static void Cadastrar(String NomeUsuario, String email, String senha) {
-        boolean UsuarioJaCadastrado = false;
-        boolean existe = new File("./dados/Usuarios.csv").exists();
+        File arquivoUsuarios = new File("./dados/Usuarios.csv");
+        boolean usuarioJaCadastrado = false;
+        boolean existe = arquivoUsuarios.exists();
 
-        try (FileWriter writer = new FileWriter("./dados/Usuarios.csv", StandardCharsets.ISO_8859_1, existe)) {
-
-            if (!existe) {
-                writer.write("NomeUsuario;Email;Senha\n");
-                writer.write("Administrador;administradoremail.official@gmail.com;Admin123\n");
-                writer.flush();
-            }
-            try (BufferedReader reader = new BufferedReader(new FileReader("./dados/Usuarios.csv", StandardCharsets.ISO_8859_1))) {
-                String linha;
-                boolean primeiraLinha = true;
-                while ((linha = reader.readLine()) != null) {
-                    if (primeiraLinha) {
-                        primeiraLinha = false;
-                        continue;
-                    }
-                    String[] partes = linha.split(";");
-                    String nomeUsuarioCSV = partes[0];
-                    String emailCSV = partes[1];
-                    if (nomeUsuarioCSV.equals(NomeUsuario) || emailCSV.equals(email)) {
-                        UsuarioJaCadastrado = true;
-                        break;
-                    }
+        // Verifica se o usuário já está cadastrado
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivoUsuarios, StandardCharsets.ISO_8859_1))) {
+            String linha;
+            boolean primeiraLinha = true;
+            while ((linha = reader.readLine()) != null) {
+                if (primeiraLinha) {
+                    primeiraLinha = false;
+                    continue;
                 }
-            }
-            if (!UsuarioJaCadastrado) {
-                Usuario usuario = new Usuario(NomeUsuario);
-                usuario.setEmail(email);
-                usuario.setSenha(senha);
-                Sistema.AdicionarUsuario(usuario);
-                salvarDadosUsuario(usuario); // Salva em um arquivo individual
-
-                // Mensagem de sucesso
-                JOptionPane.showMessageDialog(null, "Novo usuário cadastrado: " + NomeUsuario, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuário ou E-mail já está cadastrado no sistema.", "Falha ao cadastrar", JOptionPane.INFORMATION_MESSAGE);
+                String[] partes = linha.split(";");
+                String nomeUsuarioCSV = partes[0];
+                String emailCSV = partes[1];
+                if (nomeUsuarioCSV.equals(NomeUsuario) || emailCSV.equals(email)) {
+                    usuarioJaCadastrado = true;
+                    break;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        if (!usuarioJaCadastrado) {
+            // Adiciona o novo usuário ao arquivo CSV
+            try (FileWriter writer = new FileWriter(arquivoUsuarios, StandardCharsets.ISO_8859_1, true)) {
+                if (!existe) {
+                    writer.write("NomeUsuario;Email;Senha\n");
+                }
+                writer.write(NomeUsuario + ";" + email + ";" + senha + "\n");
+                writer.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // Cria o arquivo CSV do usuário individual apenas se necessário
+            Usuario usuario = new Usuario(NomeUsuario);
+            usuario.setEmail(email);
+            usuario.setSenha(senha);
+            salvarDadosUsuario(usuario);
+
+            JOptionPane.showMessageDialog(null, "Novo usuário cadastrado: " + NomeUsuario, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuário ou E-mail já está cadastrado no sistema.", "Falha ao cadastrar", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
+
+
 
     // Método para logar um usuário
     public static Usuario Logar(String email, String senha) {
@@ -112,18 +119,18 @@ public class Usuario {
     public static void salvarDadosUsuario(Usuario usuario) {
         File pastaUsuarios = new File("./dados/usuarios/");
         if (!pastaUsuarios.exists()) {
-            pastaUsuarios.mkdirs(); // Cria a pasta se ela não existir
+            pastaUsuarios.mkdirs();
         }
 
-        File arquivoUsuario = new File("./dados/usuarios/" + usuario.getNomeUsuario() + ".csv");
-
+        File arquivoUsuario = new File(pastaUsuarios, usuario.getNomeUsuario() + ".csv");
         try (FileWriter writer = new FileWriter(arquivoUsuario, StandardCharsets.ISO_8859_1)) {
-            writer.write(usuario.getNomeUsuario() + ";" + usuario.getEmail() + ";" + usuario.getSenha() + "\n");
+            writer.write("id_manga;manga;avaliar;avaliacao\n");
             writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     // Método para criar o arquivo CSV específico para o usuário
     private void criarArquivoCSV() {

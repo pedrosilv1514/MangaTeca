@@ -1,5 +1,9 @@
 package Classes;
 
+/*
+Classe para resolver a questão do usuário permanecer logado
+Famoso padrão de projeto (que dor)
+*/
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -36,19 +40,18 @@ public class UsuarioLogado {
 
     // Método para criar o arquivo CSV do usuário
     private void criarArquivoUsuario() {
+        if (usuario == null || usuario.getNomeUsuario() == null || usuario.getNomeUsuario().trim().isEmpty()) {
+            System.out.println("Nome de usuário inválido.");
+            return;
+        }
         String nomeArquivo = "./dados/usuarios/" + usuario.getNomeUsuario() + ".csv";
-        try {
-            FileWriter writer = new FileWriter(nomeArquivo, StandardCharsets.ISO_8859_1);
-            // Escreve o cabeçalho do CSV
+        try (FileWriter writer = new FileWriter(nomeArquivo, StandardCharsets.ISO_8859_1)) {
             writer.write("id_manga;manga;avaliar;avaliacao\n");
-            // Aqui você pode adicionar mais lógica para popular o arquivo com dados existentes se necessário
             writer.flush();
-            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
     // Método para redefinir o Singleton (útil para testes ou logout)
     public static void reset() {
         instancia = null;

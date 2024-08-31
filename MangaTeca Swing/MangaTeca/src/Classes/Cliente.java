@@ -8,9 +8,11 @@ public class Cliente extends Usuario {
     protected Cartao cartao;
     
     public Cliente(){
+        super("");
     }
     
     public Cliente(String NomeUsuario, String email, String senha, ArrayList<Compras> Compras, ArrayList<Avaliacao> avaliacoes, CarrinhoDeCompras carrinho, Cartao cartao){
+        super(NomeUsuario);
         Cadastrar(NomeUsuario, email, senha);
         this.historicoCompras = Compras;
         this.avaliacoes = avaliacoes;

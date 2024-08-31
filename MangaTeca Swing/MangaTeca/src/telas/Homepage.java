@@ -57,6 +57,7 @@ public class Homepage extends javax.swing.JFrame {
         String nomeUsuario = usuarioLogado.getUsuario() != null ? usuarioLogado.getUsuario().getNomeUsuario() : "Usuário não logado";
 
         jLabel6.setText(nomeUsuario);
+        System.out.println("Adeus," + nomeUsuario);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         

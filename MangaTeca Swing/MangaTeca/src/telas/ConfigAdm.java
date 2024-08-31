@@ -4,7 +4,17 @@
  */
 package telas;
 
+import Classes.Acao;
+import Classes.Avaliacao;
+import Classes.Comedia;
+import Classes.Manga;
+import Classes.Romance;
+import Classes.Sistema;
 import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,11 +22,48 @@ import java.awt.Cursor;
  */
 public class ConfigAdm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ConfigAdm
-     */
+    String modo = "adicionar";
+    DefaultTableModel model = new DefaultTableModel();
     public ConfigAdm() {
         initComponents();
+        btnRemover.setEnabled(false);
+        btnEditar.setEnabled(false);
+        ArrayList<Manga> listaMangas = Sistema.ListarMangas();
+        model.addColumn("ID");
+        model.addColumn("Título");
+        model.addColumn("Autor");
+        model.addColumn("Gênero");
+        model.addColumn("Preço");
+        model.addColumn("Estoque");
+        for (Manga manga : listaMangas) {
+            model.addRow(new Object[]{
+                manga.getId(),
+                manga.getTitulo(),
+                manga.getAutor(),
+                manga.getGenero().getTipo(),
+                manga.getPreco(),
+                manga.getEstoque()
+            });
+        }
+        tableMangas.setModel(model);
+        if (tableMangas.getColumnModel().getColumnCount() > 0) {
+            tableMangas.getColumnModel().getColumn(0).setMinWidth(40);
+            tableMangas.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tableMangas.getColumnModel().getColumn(0).setMaxWidth(40);
+            tableMangas.getColumnModel().getColumn(2).setMinWidth(120);
+            tableMangas.getColumnModel().getColumn(2).setPreferredWidth(120);
+            tableMangas.getColumnModel().getColumn(2).setMaxWidth(120);
+            tableMangas.getColumnModel().getColumn(3).setMaxWidth(70);
+            tableMangas.getColumnModel().getColumn(3).setPreferredWidth(70);
+            tableMangas.getColumnModel().getColumn(3).setMinWidth(70);
+            tableMangas.getColumnModel().getColumn(3).setMaxWidth(60);
+            tableMangas.getColumnModel().getColumn(4).setMinWidth(65);
+            tableMangas.getColumnModel().getColumn(4).setPreferredWidth(65);
+            tableMangas.getColumnModel().getColumn(4).setMaxWidth(65);
+            tableMangas.getColumnModel().getColumn(5).setMinWidth(70);
+            tableMangas.getColumnModel().getColumn(5).setPreferredWidth(70);
+            tableMangas.getColumnModel().getColumn(5).setMaxWidth(70);
+        }
     }
 
     /**
@@ -39,24 +86,28 @@ public class ConfigAdm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtSinopse = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        txtConfirmaLogin = new javax.swing.JToggleButton();
-        txtConfirmaLogin1 = new javax.swing.JToggleButton();
-        txtConfirmaLogin2 = new javax.swing.JToggleButton();
+        btnRemover = new javax.swing.JToggleButton();
+        btnAdicionar = new javax.swing.JToggleButton();
+        btnEditar = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableMangas = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        txtEstoque = new javax.swing.JTextField();
+        comboGenero = new javax.swing.JComboBox<>();
+        txtLinkImagem = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        lblModo = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        txtAutor = new javax.swing.JTextField();
+        txtPreco = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(820, 612));
@@ -132,10 +183,11 @@ public class ConfigAdm extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jButton1))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,25 +220,35 @@ public class ConfigAdm extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(10, 100, 40, 20);
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtTituloActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(10, 120, 430, 20);
+        txtTitulo.addKeyListener(new KeyAdapter() {
+            private final String whitelist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._+,*= ";
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (whitelist.indexOf(c) < 0) {
+                    e.consume(); // Ignora o caractere se não estiver na lista permitida
+                }
+            }
+        });
+        jPanel1.add(txtTitulo);
+        txtTitulo.setBounds(10, 120, 430, 22);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(237, 237, 237));
-        jLabel7.setText("Gênero");
+        jLabel7.setText("Id");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(310, 150, 50, 20);
+        jLabel7.setBounds(390, 150, 20, 20);
 
-        jTextArea1.setColumns(1);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Chiyo Mihama é uma criança prodígio que pulou várias séries para terminar o ensino médio. No primeiro dia, ela descobre que sua turma está cheia de indivíduos excêntricos. À medida que as colegas se tornam boas amigas ao longo do tempo, elas vivenciam a vida cotidiana juntos – coisas como escola, estudo, viagens de verão e envolvimento em todos os tipos de travessuras!\n\n");
-        jScrollPane1.setViewportView(jTextArea1);
+        txtSinopse.setColumns(1);
+        txtSinopse.setLineWrap(true);
+        txtSinopse.setRows(5);
+        txtSinopse.setText("Chiyo Mihama é uma criança prodígio que pulou várias séries para terminar o ensino médio. No primeiro dia, ela descobre que sua turma está cheia de indivíduos excêntricos. À medida que as colegas se tornam boas amigas ao longo do tempo, elas vivenciam a vida cotidiana juntos – coisas como escola, estudo, viagens de verão e envolvimento em todos os tipos de travessuras!\n\n");
+        jScrollPane1.setViewportView(txtSinopse);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(460, 120, 350, 130);
@@ -197,13 +259,15 @@ public class ConfigAdm extends javax.swing.JFrame {
         jPanel1.add(jLabel9);
         jLabel9.setBounds(10, 150, 50, 20);
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtId.setEditable(false);
+        txtId.setEnabled(false);
+        txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtIdActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(10, 170, 260, 22);
+        jPanel1.add(txtId);
+        txtId.setBounds(390, 170, 40, 22);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(237, 237, 237));
@@ -211,52 +275,43 @@ public class ConfigAdm extends javax.swing.JFrame {
         jPanel1.add(jLabel10);
         jLabel10.setBounds(10, 200, 50, 20);
 
-        jTextField4.setText("R$ 00,00");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        btnRemover.setBackground(new java.awt.Color(218, 0, 55));
+        btnRemover.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnRemover.setForeground(new java.awt.Color(237, 237, 237));
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                btnRemoverActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4);
-        jTextField4.setBounds(10, 220, 80, 22);
+        jPanel1.add(btnRemover);
+        btnRemover.setBounds(520, 270, 170, 40);
 
-        txtConfirmaLogin.setBackground(new java.awt.Color(218, 0, 55));
-        txtConfirmaLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        txtConfirmaLogin.setForeground(new java.awt.Color(237, 237, 237));
-        txtConfirmaLogin.setText("Remover");
-        txtConfirmaLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnAdicionar.setBackground(new java.awt.Color(218, 0, 55));
+        btnAdicionar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnAdicionar.setForeground(new java.awt.Color(237, 237, 237));
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConfirmaLoginActionPerformed(evt);
+                btnAdicionarActionPerformed(evt);
             }
         });
-        jPanel1.add(txtConfirmaLogin);
-        txtConfirmaLogin.setBounds(520, 270, 170, 40);
+        jPanel1.add(btnAdicionar);
+        btnAdicionar.setBounds(80, 270, 170, 40);
 
-        txtConfirmaLogin1.setBackground(new java.awt.Color(218, 0, 55));
-        txtConfirmaLogin1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        txtConfirmaLogin1.setForeground(new java.awt.Color(237, 237, 237));
-        txtConfirmaLogin1.setText("Adicionar");
-        txtConfirmaLogin1.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setBackground(new java.awt.Color(218, 0, 55));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(237, 237, 237));
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConfirmaLogin1ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(txtConfirmaLogin1);
-        txtConfirmaLogin1.setBounds(150, 270, 170, 40);
+        jPanel1.add(btnEditar);
+        btnEditar.setBounds(290, 270, 170, 40);
 
-        txtConfirmaLogin2.setBackground(new java.awt.Color(218, 0, 55));
-        txtConfirmaLogin2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        txtConfirmaLogin2.setForeground(new java.awt.Color(237, 237, 237));
-        txtConfirmaLogin2.setText("Editar");
-        txtConfirmaLogin2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConfirmaLogin2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtConfirmaLogin2);
-        txtConfirmaLogin2.setBounds(340, 270, 170, 40);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableMangas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -272,7 +327,7 @@ public class ConfigAdm extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tableMangas);
 
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(0, 330, 820, 280);
@@ -281,34 +336,99 @@ public class ConfigAdm extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(237, 237, 237));
         jLabel11.setText("Link da Imagem");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(220, 200, 100, 20);
+        jLabel11.setBounds(170, 200, 100, 20);
 
-        jTextField5.setText("100");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        txtEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                txtEstoqueActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(110, 220, 80, 22);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Romance", "Ação", "Comédia" }));
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(310, 170, 90, 22);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        txtEstoque.addKeyListener(new KeyAdapter() {
+            private final String whitelist = "0123456789";
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (whitelist.indexOf(c) < 0) {
+                    e.consume(); // Ignora o caractere se não estiver na lista permitida
+                }
             }
         });
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(220, 220, 210, 22);
+        jPanel1.add(txtEstoque);
+        txtEstoque.setBounds(90, 220, 60, 22);
+
+        comboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Romance", "Ação", "Comédia" }));
+        jPanel1.add(comboGenero);
+        comboGenero.setBounds(280, 170, 90, 22);
+
+        txtLinkImagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLinkImagemActionPerformed(evt);
+            }
+        });
+        txtLinkImagem.addKeyListener(new KeyAdapter() {
+            private final String whitelist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._+,*=";
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (whitelist.indexOf(c) < 0) {
+                    e.consume(); // Ignora o caractere se não estiver na lista permitida
+                }
+            }
+        });
+        jPanel1.add(txtLinkImagem);
+        txtLinkImagem.setBounds(170, 220, 260, 22);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(237, 237, 237));
         jLabel12.setText("Estoque");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(110, 200, 50, 20);
+        jLabel12.setBounds(90, 200, 50, 20);
+
+        lblModo.setForeground(new java.awt.Color(237, 237, 237));
+        lblModo.setText("Modo Atual: Adicionar mangá");
+        jPanel1.add(lblModo);
+        lblModo.setBounds(560, 70, 170, 16);
+
+        jButton2.setText("Mudar Modo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(580, 90, 110, 20);
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(237, 237, 237));
+        jLabel13.setText("Gênero");
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(280, 150, 50, 20);
+
+        txtAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAutorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtAutor);
+        txtAutor.setBounds(10, 170, 260, 22);
+
+        txtPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecoActionPerformed(evt);
+            }
+        });
+        txtPreco.addKeyListener(new KeyAdapter() {
+            private final String whitelist = "0123456789.";
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (whitelist.indexOf(c) < 0) {
+                    e.consume(); // Ignora o caractere se não estiver na lista permitida
+                }
+            }
+        });
+        jPanel1.add(txtPreco);
+        txtPreco.setBounds(10, 220, 60, 22);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -329,37 +449,101 @@ public class ConfigAdm extends javax.swing.JFrame {
         jPanel4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_jPanel4MouseEntered
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
+
+    }//GEN-LAST:event_txtTituloActionPerformed
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        String titulo = txtTitulo.getText();
+        String autor = txtAutor.getText();
+        var gen = (String) comboGenero.getSelectedItem();
+        double preco = Double.parseDouble(txtPreco.getText());
+        String linkImagem = txtLinkImagem.getText();
+        int estoque = Integer.parseInt(txtEstoque.getText());
+        String sinopse = txtSinopse.getText();
+        ArrayList<Avaliacao> avaliacoes = new ArrayList<>();
+        if (gen.equals("Ação")){
+            Acao genero = new Acao("Acao");
+            Manga manga = new Manga(1, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
+            model.addRow(new Object[]{
+                manga.getId(),
+                manga.getTitulo(),
+                manga.getAutor(),
+                manga.getGenero().getTipo(),
+                manga.getPreco(),
+                manga.getEstoque()
+            });
+        } else if (gen.equals("Comédia")){
+            Comedia genero = new Comedia("Comedia");
+            Manga manga = new Manga(1, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
+            model.addRow(new Object[]{
+                manga.getId(),
+                manga.getTitulo(),
+                manga.getAutor(),
+                manga.getGenero().getTipo(),
+                manga.getPreco(),
+                manga.getEstoque()
+            });
+        } else if (gen.equals("Romance")){
+            Romance genero = new Romance("Romance");
+            Manga manga = new Manga(1, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
+            model.addRow(new Object[]{
+                manga.getId(),
+                manga.getTitulo(),
+                manga.getAutor(),
+                manga.getGenero().getTipo(),
+                manga.getPreco(),
+                manga.getEstoque()
+            });
+        }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstoqueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtEstoqueActionPerformed
 
-    private void txtConfirmaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLoginActionPerformed
-
-    }//GEN-LAST:event_txtConfirmaLoginActionPerformed
-
-    private void txtConfirmaLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLogin1ActionPerformed
+    private void txtLinkImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLinkImagemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtConfirmaLogin1ActionPerformed
+    }//GEN-LAST:event_txtLinkImagemActionPerformed
 
-    private void txtConfirmaLogin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLogin2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtConfirmaLogin2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(modo.equals("adicionar")){
+            modo = "editar";
+            lblModo.setText("Modo Atual: Editar mangá");
+            btnEditar.setEnabled(true);
+            btnAdicionar.setEnabled(false);
+        } else if (modo.equals("editar")){
+            modo = "remover";
+            lblModo.setText("Modo Atual: Remover mangá");
+            btnEditar.setEnabled(false);
+            btnRemover.setEnabled(true);
+        } else if (modo.equals("remover")){
+            modo = "adicionar";
+            lblModo.setText("Modo Atual: Adicionar mangá");
+            btnAdicionar.setEnabled(true);
+            btnRemover.setEnabled(false);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAutorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtAutorActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtPrecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,12 +581,17 @@ public class ConfigAdm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnAdicionar;
+    private javax.swing.JToggleButton btnEditar;
+    private javax.swing.JToggleButton btnRemover;
+    private javax.swing.JComboBox<String> comboGenero;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -416,15 +605,14 @@ public class ConfigAdm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JToggleButton txtConfirmaLogin;
-    private javax.swing.JToggleButton txtConfirmaLogin1;
-    private javax.swing.JToggleButton txtConfirmaLogin2;
+    private javax.swing.JLabel lblModo;
+    private javax.swing.JTable tableMangas;
+    private javax.swing.JTextField txtAutor;
+    private javax.swing.JTextField txtEstoque;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtLinkImagem;
+    private javax.swing.JFormattedTextField txtPreco;
+    private javax.swing.JTextArea txtSinopse;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

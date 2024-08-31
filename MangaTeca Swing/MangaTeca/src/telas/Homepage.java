@@ -40,14 +40,21 @@ public class Homepage extends javax.swing.JFrame {
                
 
         initComponents();
-        //mostrarInformacoesUsuario();
-        URL url = new URL("https://imgsrv.crunchyroll.com/cdn-cgi/image/fit=contain,format=auto,quality=85,width=480,height=720/catalog/crunchyroll/cbb55a6382682bf71e91f685c6473c5a.jpg");
-        ImageIcon iconOriginal = new ImageIcon(url);
-        int larguraNova = 220;
-        int alturaNova = 150;
-        Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
-        ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
-        labelManga1.setIcon(iconRedimensionado);
+        try {
+            URL url = new URL("ttps://imgsrv.crunchyroll.com/cdn-cgi/image/fit=contain,format=auto,quality=85,width=480,height=720/catalog/crunchyroll/cbb55a6382682bf71e91f685c6473c5a.jpg");
+            ImageIcon iconOriginal = new ImageIcon(url);
+            int larguraNova = 220;
+            int alturaNova = 150;
+            Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
+            ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
+            labelManga1.setIcon(iconRedimensionado);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ImageIcon image = new ImageIcon(getClass().getResource("/Imagens/filenotfound.jpg"));
+            Image imagem = image.getImage().getScaledInstance(220, 150, Image.SCALE_SMOOTH);
+            ImageIcon imagemRedimensionada = new ImageIcon(imagem);
+            labelManga1.setIcon(imagemRedimensionada);
+        }
         //jLabel6.setText(usuarioLogado.getNomeUsuario());
         //jLabel6.setText(usuario.getNomeUsuario());
         //System.out.println(usuario.getNomeUsuario());

@@ -2,6 +2,8 @@
 package telas;
 
 import Classes.Sistema;
+import Classes.Usuario;
+import Classes.UsuarioLogado;
 import Classes.Manga;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -29,8 +31,16 @@ public class Homepage extends javax.swing.JFrame {
     /**
      * Creates new form Homepage
      */
+    /*
+    public Homepage() throws IOException{
+    }
+    */
+    
     public Homepage() throws IOException {
+               
+
         initComponents();
+        //mostrarInformacoesUsuario();
         URL url = new URL("https://imgsrv.crunchyroll.com/cdn-cgi/image/fit=contain,format=auto,quality=85,width=480,height=720/catalog/crunchyroll/cbb55a6382682bf71e91f685c6473c5a.jpg");
         ImageIcon iconOriginal = new ImageIcon(url);
         int larguraNova = 220;
@@ -38,6 +48,17 @@ public class Homepage extends javax.swing.JFrame {
         Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
         ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
         labelManga1.setIcon(iconRedimensionado);
+        //jLabel6.setText(usuarioLogado.getNomeUsuario());
+        //jLabel6.setText(usuario.getNomeUsuario());
+        //System.out.println(usuario.getNomeUsuario());
+        
+        //Teste Usuário logado
+        UsuarioLogado usuarioLogado = UsuarioLogado.getInstance();
+        String nomeUsuario = usuarioLogado.getUsuario() != null ? usuarioLogado.getUsuario().getNomeUsuario() : "Usuário não logado";
+
+        jLabel6.setText(nomeUsuario);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         
         //Teste para a leitura do csv e adicionamento ao jTable1
         ArrayList<Manga> listaMangas = Sistema.ListarMangas();
@@ -300,7 +321,25 @@ public class Homepage extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+    
+       public void mostrarInformacoesUsuario() {
+        Usuario usuarioLogado = UsuarioLogado.getInstance().getUsuario();
+        if (usuarioLogado != null) {
+            String nomeUsuario = usuarioLogado.getNomeUsuario();
+            if (nomeUsuario != null && !nomeUsuario.isEmpty()) {
+                jLabel6.setText("Bem-vindo, " + nomeUsuario);
+                System.out.println("Usuário logado: " + nomeUsuario); // Imprime no terminal
+            } else {
+                jLabel6.setText("Nenhum usuário logado");
+                System.out.println("Nome do usuário não encontrado"); // Imprime no terminal
+            }
+        } else {
+            jLabel6.setText("Nenhum usuário logado");
+            System.out.println("Nenhum usuário logado"); // Imprime no terminal
+        }
+    }
 
+    
     /**
      * @param args the command line arguments
      */

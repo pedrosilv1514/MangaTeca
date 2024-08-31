@@ -4,6 +4,8 @@ import java.io.*;
 import Classes.Sistema;
 import Classes.Cliente;
 import Classes.Usuario;
+import Classes.UsuarioLogado;
+import telas.Homepage;
 import javax.swing.*;
 
 /**
@@ -107,14 +109,24 @@ public class Login extends javax.swing.JFrame {
     private void txtConfirmaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaLoginActionPerformed
         String txtEmail = txtEmailLogin.getText();
         String txtSenha = txtSenhaLogin.getText();
-        Usuario.Logar(txtEmail, txtSenha);
+        Usuario usuarioLogado = Usuario.Logar(txtEmail, txtSenha);
+        
+        if(usuarioLogado != null){
+            this.dispose();
+            try{
+                Homepage homePage = new Homepage();
+                homePage.setVisible(true);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_txtConfirmaLoginActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+        boolean existe = new File("./dados/Usuarios.csv").exists();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

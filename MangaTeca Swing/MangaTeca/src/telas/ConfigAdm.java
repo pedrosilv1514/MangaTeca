@@ -320,11 +320,11 @@ public class ConfigAdm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Título", "Autor", "Sinopse", "Preço", "Estoque"
+                "Id", "Título", "Autor", "Preço", "Estoque"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -527,7 +527,71 @@ public class ConfigAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        int id = Integer.parseInt(txtId.getText());
+        String titulo = txtTitulo.getText();
+        String autor = txtAutor.getText();
+        var gen = (String) comboGenero.getSelectedItem();
+        String linkImagem = txtLinkImagem.getText();
+        String sinopse = txtSinopse.getText();
+        ArrayList<Avaliacao> avaliacoes = new ArrayList<>();
+        if(titulo.equals("") || autor.equals("") || sinopse.equals("") || linkImagem.equals("") || txtEstoque.getText().equals("") || txtPreco.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de continuar.", "Falha ao adicionar mangá", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int estoque = Integer.parseInt(txtEstoque.getText());
+            double preco = Double.parseDouble(txtPreco.getText());
+            if (gen.equals("Ação")){
+                Acao genero = new Acao("Acao");
+                Manga mangaAtualizado = new Manga(id, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
+                admin.atualizarManga(mangaAtualizado, mangaAtualizado);
+                DefaultTableModel model = (DefaultTableModel) tableMangas.getModel();
+                model.setRowCount(0);
+                for (Manga manga : Sistema.ListarMangas()) {
+                    System.out.println(manga);
+                    model.addRow(new Object[]{
+                        manga.getId(),
+                        manga.getTitulo(),
+                        manga.getAutor(),
+                        manga.getGenero().getTipo(),
+                        manga.getPreco(),
+                        manga.getEstoque()
+                    });
+                }
+            } else if (gen.equals("Romance")){
+                Romance genero = new Romance("Romance");
+                Manga mangaAtualizado = new Manga(id, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
+                admin.atualizarManga(mangaAtualizado, mangaAtualizado);
+                DefaultTableModel model = (DefaultTableModel) tableMangas.getModel();
+                model.setRowCount(0);
+                for (Manga manga : Sistema.ListarMangas()) {
+                    System.out.println(manga);
+                    model.addRow(new Object[]{
+                        manga.getId(),
+                        manga.getTitulo(),
+                        manga.getAutor(),
+                        manga.getGenero().getTipo(),
+                        manga.getPreco(),
+                        manga.getEstoque()
+                    });
+                }
+            } else if (gen.equals("Ação")){
+                Acao genero = new Acao("Acao");
+                Manga mangaAtualizado = new Manga(id, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
+                admin.atualizarManga(mangaAtualizado, mangaAtualizado);
+                DefaultTableModel model = (DefaultTableModel) tableMangas.getModel();
+                model.setRowCount(0);
+                for (Manga manga : Sistema.ListarMangas()) {
+                    System.out.println(manga);
+                    model.addRow(new Object[]{
+                        manga.getId(),
+                        manga.getTitulo(),
+                        manga.getAutor(),
+                        manga.getGenero().getTipo(),
+                        manga.getPreco(),
+                        manga.getEstoque()
+                    });
+                }
+            }
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void txtEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstoqueActionPerformed
@@ -540,17 +604,45 @@ public class ConfigAdm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if(modo.equals("adicionar")){
+            txtTitulo.setText("");
+            txtAutor.setText("");
+            txtEstoque.setText("");
+            txtPreco.setText("");
+            txtSinopse.setText("");
+            txtId.setText("");
+            txtLinkImagem.setText("");
             modo = "editar";
             lblModo.setText("Modo Atual: Editar mangá");
             btnEditar.setEnabled(true);
             btnAdicionar.setEnabled(false);
         } else if (modo.equals("editar")){
             modo = "remover";
+            txtTitulo.setText("");
+            txtAutor.setText("");
+            txtEstoque.setText("");
+            txtPreco.setText("");
+            txtSinopse.setText("");
+            txtId.setText("");
+            txtLinkImagem.setText("");
+            txtTitulo.setEnabled(false);
+            txtAutor.setEnabled(false);
+            txtEstoque.setEnabled(false);
+            txtSinopse.setEnabled(false);
+            txtPreco.setEnabled(false);
+            txtLinkImagem.setEnabled(false);
+            comboGenero.setEnabled(false);
             lblModo.setText("Modo Atual: Remover mangá");
             btnEditar.setEnabled(false);
             btnRemover.setEnabled(true);
         } else if (modo.equals("remover")){
             modo = "adicionar";
+            txtTitulo.setEnabled(true);
+            txtAutor.setEnabled(true);
+            txtEstoque.setEnabled(true);
+            txtSinopse.setEnabled(true);
+            txtPreco.setEnabled(true);
+            txtLinkImagem.setEnabled(true);
+            comboGenero.setEnabled(true);
             lblModo.setText("Modo Atual: Adicionar mangá");
             btnAdicionar.setEnabled(true);
             btnRemover.setEnabled(false);
@@ -566,7 +658,24 @@ public class ConfigAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecoActionPerformed
 
     private void tableMangasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMangasMouseClicked
-        // TODO add your handling code here:
+        if (modo.equals("editar")){
+            int linha = tableMangas.getSelectedRow();
+            DefaultTableModel modelo = (DefaultTableModel) tableMangas.getModel();
+            txtId.setText(model.getValueAt(linha, 0).toString());
+            txtTitulo.setText(model.getValueAt(linha, 1).toString());
+            txtAutor.setText(model.getValueAt(linha, 2).toString());
+            comboGenero.setSelectedItem(model.getValueAt(linha, 3));
+            txtPreco.setText(model.getValueAt(linha, 4).toString());
+            txtEstoque.setText(model.getValueAt(linha, 5).toString());
+            for(Manga m : Sistema.ListarMangas()){
+                int id = Integer.parseInt(model.getValueAt(linha,0).toString());
+                if (m.getId()==id){
+                    txtLinkImagem.setText(m.getLinkImagem());
+                    txtSinopse.setText(m.getSinopse());
+                break;
+                }
+            }
+        }
     }//GEN-LAST:event_tableMangasMouseClicked
 
     /**

@@ -83,7 +83,10 @@ public class Sistema {
     // Método para listar os mangás do sistema
     public static ArrayList<Manga> ListarMangas() {
         ArrayList<Manga> mangas = new ArrayList<>();
-
+        boolean existe = new File(csvMangas).exists();
+        if (!existe){
+            return mangas;
+        }
         try {
             // Abrir o leitor
             BufferedReader reader = new BufferedReader(new FileReader(csvMangas));
@@ -104,8 +107,8 @@ public class Sistema {
                 double preco = Double.parseDouble(partes[6]);
                 String avaliacoes = partes[7];
                 String linkImagem = partes[8];
-
-                avaliacoes = avaliacoes.substring(1, avaliacoes.length() - 1); // Remove os colchetes iniciais e finais
+                if (!avaliacoes.equals("[]")){
+                    avaliacoes = avaliacoes.substring(1, avaliacoes.length() - 1); // Remove os colchetes iniciais e finais
                 String[] parts = avaliacoes.split("(?<=\\}),\\s(?=\\{)"); // Divide em partes, separando por { e }
                 ArrayList<Hashtable<String, String>> hashtables = new ArrayList<>(); // arraylist que vai ter hashtables das avaliações
                 for (String part : parts) {
@@ -119,10 +122,10 @@ public class Sistema {
                     }
                     hashtables.add(hashtable);
                 }
-
                 for (Hashtable<String, String> hashtable : hashtables) {
                     Avaliacao avaliacao = new Avaliacao(Integer.parseInt(hashtable.get("nota")), hashtable.get("comentario"), LocalDate.parse(hashtable.get("data")));
                     listaAvaliacoes.add(avaliacao);
+                }
                 }
 
                 if (partes[3].equals("Romance")) {

@@ -5,8 +5,10 @@
 package telas;
 
 import Classes.Acao;
+import Classes.Administrador;
 import Classes.Avaliacao;
 import Classes.Comedia;
+import Classes.Genero;
 import Classes.Manga;
 import Classes.Romance;
 import Classes.Sistema;
@@ -14,6 +16,7 @@ import java.awt.Cursor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,6 +27,7 @@ public class ConfigAdm extends javax.swing.JFrame {
 
     String modo = "adicionar";
     DefaultTableModel model = new DefaultTableModel();
+    Administrador admin = new Administrador();
     public ConfigAdm() {
         initComponents();
         btnRemover.setEnabled(false);
@@ -36,6 +40,7 @@ public class ConfigAdm extends javax.swing.JFrame {
         model.addColumn("Preço");
         model.addColumn("Estoque");
         for (Manga manga : listaMangas) {
+            System.out.println(manga);
             model.addRow(new Object[]{
                 manga.getId(),
                 manga.getTitulo(),
@@ -247,7 +252,6 @@ public class ConfigAdm extends javax.swing.JFrame {
         txtSinopse.setColumns(1);
         txtSinopse.setLineWrap(true);
         txtSinopse.setRows(5);
-        txtSinopse.setText("Chiyo Mihama é uma criança prodígio que pulou várias séries para terminar o ensino médio. No primeiro dia, ela descobre que sua turma está cheia de indivíduos excêntricos. À medida que as colegas se tornam boas amigas ao longo do tempo, elas vivenciam a vida cotidiana juntos – coisas como escola, estudo, viagens de verão e envolvimento em todos os tipos de travessuras!\n\n");
         jScrollPane1.setViewportView(txtSinopse);
 
         jPanel1.add(jScrollPane1);
@@ -309,7 +313,7 @@ public class ConfigAdm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnEditar);
-        btnEditar.setBounds(290, 270, 170, 40);
+        btnEditar.setBounds(300, 270, 170, 40);
 
         tableMangas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -325,6 +329,11 @@ public class ConfigAdm extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        tableMangas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMangasMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tableMangas);
@@ -366,7 +375,7 @@ public class ConfigAdm extends javax.swing.JFrame {
             }
         });
         txtLinkImagem.addKeyListener(new KeyAdapter() {
-            private final String whitelist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._+,*=";
+            private final String whitelist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._+,*=:/";
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
@@ -465,44 +474,55 @@ public class ConfigAdm extends javax.swing.JFrame {
         String titulo = txtTitulo.getText();
         String autor = txtAutor.getText();
         var gen = (String) comboGenero.getSelectedItem();
-        double preco = Double.parseDouble(txtPreco.getText());
         String linkImagem = txtLinkImagem.getText();
-        int estoque = Integer.parseInt(txtEstoque.getText());
         String sinopse = txtSinopse.getText();
         ArrayList<Avaliacao> avaliacoes = new ArrayList<>();
-        if (gen.equals("Ação")){
-            Acao genero = new Acao("Acao");
-            Manga manga = new Manga(1, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
-            model.addRow(new Object[]{
-                manga.getId(),
-                manga.getTitulo(),
-                manga.getAutor(),
-                manga.getGenero().getTipo(),
-                manga.getPreco(),
-                manga.getEstoque()
-            });
-        } else if (gen.equals("Comédia")){
-            Comedia genero = new Comedia("Comedia");
-            Manga manga = new Manga(1, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
-            model.addRow(new Object[]{
-                manga.getId(),
-                manga.getTitulo(),
-                manga.getAutor(),
-                manga.getGenero().getTipo(),
-                manga.getPreco(),
-                manga.getEstoque()
-            });
-        } else if (gen.equals("Romance")){
-            Romance genero = new Romance("Romance");
-            Manga manga = new Manga(1, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
-            model.addRow(new Object[]{
-                manga.getId(),
-                manga.getTitulo(),
-                manga.getAutor(),
-                manga.getGenero().getTipo(),
-                manga.getPreco(),
-                manga.getEstoque()
-            });
+        if(titulo.equals("") || autor.equals("") || sinopse.equals("") || linkImagem.equals("") || txtEstoque.getText().equals("") || txtPreco.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de continuar.", "Falha ao adicionar mangá", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int estoque = Integer.parseInt(txtEstoque.getText());
+            double preco = Double.parseDouble(txtPreco.getText());
+            if (gen.equals("Ação")){
+                Acao genero = new Acao("Acao");
+                Manga manga = new Manga(1, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
+                model.addRow(new Object[]{
+                    manga.getId(),
+                    manga.getTitulo(),
+                    manga.getAutor(),
+                    manga.getGenero().getTipo(),
+                    manga.getPreco(),
+                    manga.getEstoque()
+                });
+                admin.adicionarManga(manga);
+                JOptionPane.showMessageDialog(null, "Novo mangá adicionado:" + manga.getTitulo(), "Sucesso", JOptionPane.PLAIN_MESSAGE);
+            } else if (gen.equals("Comédia")){
+                Comedia genero = new Comedia("Comedia");
+                Manga manga = new Manga(1, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
+                System.out.println(manga);
+                model.addRow(new Object[]{
+                    manga.getId(),
+                    manga.getTitulo(),
+                    manga.getAutor(),
+                    manga.getGenero().getTipo(),
+                    manga.getPreco(),
+                    manga.getEstoque()
+                });
+                admin.adicionarManga(manga);
+                JOptionPane.showMessageDialog(null, "Novo mangá adicionado:" + manga.getTitulo(), "Sucesso", JOptionPane.PLAIN_MESSAGE);
+            } else if (gen.equals("Romance")){
+                Romance genero = new Romance("Romance");
+                Manga manga = new Manga(1, titulo, sinopse, genero, autor, estoque, preco, avaliacoes, linkImagem);
+                model.addRow(new Object[]{
+                    manga.getId(),
+                    manga.getTitulo(),
+                    manga.getAutor(),
+                    manga.getGenero().getTipo(),
+                    manga.getPreco(),
+                    manga.getEstoque()
+                });
+                admin.adicionarManga(manga);
+                JOptionPane.showMessageDialog(null, "Novo mangá adicionado:" + manga.getTitulo(), "Sucesso", JOptionPane.PLAIN_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
@@ -544,6 +564,10 @@ public class ConfigAdm extends javax.swing.JFrame {
     private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecoActionPerformed
+
+    private void tableMangasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMangasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableMangasMouseClicked
 
     /**
      * @param args the command line arguments

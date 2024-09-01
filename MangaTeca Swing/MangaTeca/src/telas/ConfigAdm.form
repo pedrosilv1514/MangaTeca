@@ -292,7 +292,6 @@
                 <Property name="columns" type="int" value="1"/>
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="Chiyo Mihama &#xe9; uma crian&#xe7;a prod&#xed;gio que pulou v&#xe1;rias s&#xe9;ries para terminar o ensino m&#xe9;dio. No primeiro dia, ela descobre que sua turma est&#xe1; cheia de indiv&#xed;duos exc&#xea;ntricos. &#xc0; medida que as colegas se tornam boas amigas ao longo do tempo, elas vivenciam a vida cotidiana juntos &#x2013; coisas como escola, estudo, viagens de ver&#xe3;o e envolvimento em todos os tipos de travessuras!&#xa;&#xa;"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -405,7 +404,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="290" y="270" width="170" height="40"/>
+              <AbsoluteConstraints x="300" y="270" width="170" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -437,6 +436,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableMangasMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -489,7 +491,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLinkImagemActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtLinkImagem.addKeyListener(new KeyAdapter() {&#xa;            private final String whitelist = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._+,*=&quot;;&#xa;            @Override&#xa;            public void keyTyped(KeyEvent e) {&#xa;                char c = e.getKeyChar();&#xa;                if (whitelist.indexOf(c) &lt; 0) {&#xa;                    e.consume(); // Ignora o caractere se n&#xe3;o estiver na lista permitida&#xa;                }&#xa;            }&#xa;        });"/>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtLinkImagem.addKeyListener(new KeyAdapter() {&#xa;            private final String whitelist = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._+,*=:/&quot;;&#xa;            @Override&#xa;            public void keyTyped(KeyEvent e) {&#xa;                char c = e.getKeyChar();&#xa;                if (whitelist.indexOf(c) &lt; 0) {&#xa;                    e.consume(); // Ignora o caractere se n&#xe3;o estiver na lista permitida&#xa;                }&#xa;            }&#xa;        });"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

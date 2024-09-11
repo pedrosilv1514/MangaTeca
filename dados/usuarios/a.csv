@@ -1,0 +1,4 @@
+id_manga;manga;avaliacao;nota;data;historico_compras
+null;null;null;null;null;[{id=5, nomeManga=Spy x Family, quantidade=1, data=2024-09-09, preco=19.99}, {id=2, nomeManga=Jujutsu Kaisen, quantidade=1, data=2024-09-10, preco=19.99}]
+5;Spy x Family;Supimpa;10;2024-09-09
+2;Jujutsu Kaisen;You are my special;8;2024-09-10

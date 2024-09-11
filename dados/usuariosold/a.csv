@@ -1,0 +1,4 @@
+id_manga;manga;avaliacao;nota;data;historico_compras
+null;null;null;null;null;[{id=2, nomeManga=Jujutsu Kaisen, quantidade=1, data=2024-09-08, preco=19.99}, {id=12, nomeManga=K-ON!, quantidade=1, data=2024-09-08, preco=9.9}, {id=14, nomeManga=Hunter x Hunter, quantidade=1, data=2024-09-08, preco=200.0}, {id=13, nomeManga=Oshi no Ko, quantidade=1, data=2024-09-09, preco=39.9}, {id=4, nomeManga=Maid Dragon, quantidade=1, data=2024-09-09, preco=19.99}, {id=6, nomeManga=Rent a Girlfriend, quantidade=1, data=2024-09-09, preco=19.99}]
+13;null;bão demais| sô;10;2024-09-09
+6;Rent a Girlfriend;PEAK FICTION;10;2024-09-09

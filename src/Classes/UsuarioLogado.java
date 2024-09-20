@@ -5,11 +5,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+//Instância do Usuario que estiver logado no aplicativo, é usada para poder guardar dados do usuário e utilizá-los.
+
 public class UsuarioLogado {
     private static UsuarioLogado instancia;
     private Usuario usuario;
     private CarrinhoDeCompras carrinho;
-    private int idSelecionado;
+    private int idSelecionado; //Id selecionado na homepage, quando algum mangá da lista é clicado.
 
     // Construtor privado para garantir o padrão Singleton
     private UsuarioLogado(Usuario usuario) {

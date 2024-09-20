@@ -8,30 +8,28 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.*;
 
+//Classe que repesenta o cliente, aquele que comprará os mangás e fará avaliações dos mesmos.
+
 public class Cliente extends Usuario {
     protected ArrayList<Compras> historicoCompras;
     protected ArrayList<Avaliacao> avaliacoes;
     protected CarrinhoDeCompras carrinhoCompras;
     
-    public Cliente(){
-        super("");
+    public Cliente(){ //Construtor vazio caso seja necessário apenas usar os métodos do cliente.
+        super();
     }
     
+    // Construtor que chama o construtor da classe pai (Usuario)
     public Cliente(String NomeUsuario, String email, String senha, ArrayList<Compras> Compras, ArrayList<Avaliacao> avaliacoes, CarrinhoDeCompras carrinho){
         super(NomeUsuario);
-        Cadastrar(NomeUsuario, email, senha);
+        Cadastrar(NomeUsuario, email, senha); //Método da classe pai que insere o cliente no CSV.
         this.historicoCompras = Compras;
         this.avaliacoes = avaliacoes;
         this.carrinhoCompras = carrinho;
     }
     
-    
-    public void pagar(String senha, double total){
-        
-    }
-    
     public void adicionarAvaliacao(Manga manga, Avaliacao avaliacao){
-        Administrador admin = new Administrador();//a avaliação vai tanto pro mangá quanto pro CSV do cliente
+        Administrador admin = new Administrador();//Instanciando um administrador para poder atualizar o mangá após a avaliação
         for(Manga m : Sistema.ListarMangas()){
             if(manga.getId() == m.getId()){
                 ArrayList<Avaliacao> avaliacoes = m.getAvaliacoes();
@@ -68,6 +66,7 @@ public class Cliente extends Usuario {
     
     
     public ArrayList<Compras> getHistoricoCompras() {
+        //Pega o historico de compras do cliente diretamente do CSV.
         ArrayList<Compras> listaCompras = new ArrayList<>();
         File pastaUsuarios = new File("./dados/usuarios/");
         if (!pastaUsuarios.exists()) {
@@ -98,15 +97,15 @@ public class Cliente extends Usuario {
                         if (!historicoCompras.equals("[]")){
                             historicoCompras = historicoCompras.substring(1, historicoCompras.length() - 1); // Remove os colchetes iniciais e finais
                             String[] parts = historicoCompras.split("(?<=\\}),\\s(?=\\{)"); // Divide em partes, separando por { e }
-                            ArrayList<Hashtable<String, String>> hashtables = new ArrayList<>(); // arraylist que vai ter hashtables das compras
+                            ArrayList<Hashtable<String, String>> hashtables = new ArrayList<>(); // Arraylist que vai ter hashtables das compras
                             for (String part : parts) {
                                 part = part.trim(); // Remove espaços em branco extras
                                 part = part.substring(1, part.length() - 1); // Remove colchetes de cada parte
                                 Hashtable<String, String> hashtable = new Hashtable<>(); // Converte a string para um Hashtable
-                                String[] keyValuePairs = part.split(",\\s*"); // vai separar os valores da string por vírgula
+                                String[] keyValuePairs = part.split(",\\s*"); // Vai separar os valores da string por vírgula
                                 for (String pair : keyValuePairs) {
-                                    String[] keyValue = pair.split("=");
-                                    hashtable.put(keyValue[0].trim(), keyValue[1].trim());
+                                    String[] keyValue = pair.split("="); //Separa key e valor por "="
+                                    hashtable.put(keyValue[0].trim(), keyValue[1].trim()); //Coloca os valores na hashtable
                                 }
                             hashtables.add(hashtable);
                             }
@@ -131,6 +130,7 @@ public class Cliente extends Usuario {
     }
 
     public ArrayList<Avaliacao> getAvaliacoes() {
+        //Pega as avaliações do cliente diretamente do CSV.
         ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<>();
         File pastaUsuarios = new File("./dados/usuarios/");
         if (!pastaUsuarios.exists()) {
@@ -140,6 +140,7 @@ public class Cliente extends Usuario {
         File arquivoUsuario = new File(pastaUsuarios, this.getNomeUsuario() + ".csv");
         if (!arquivoUsuario.exists()) {
             try (FileWriter writer = new FileWriter(arquivoUsuario, StandardCharsets.ISO_8859_1)) {
+                //Se o arquivo não existir, é criado e adicionado o cabeçalho + a linha contendo o histórico de compras vazio ([])
                 writer.write("id_manga;manga;avaliacao;nota;data;historico_compras\n");
                 writer.write("null;null;null;null;null;[]\n");
                 writer.flush();
@@ -162,7 +163,7 @@ public class Cliente extends Usuario {
                         String comentario = partes[2];
                         int nota = Integer.parseInt(partes[3]);
                         LocalDate data = LocalDate.parse(partes[4]);
-                        Cliente cliente = new Cliente();
+                        Cliente cliente = new Cliente(); //Instanciando um novo cliente apenas para o contrustor da avaliação, que só usará o atributo NomeUsuario do cliente.
                         cliente.setNomeUsuario(this.getNomeUsuario());
                         Avaliacao avaliacao = new Avaliacao(nota, comentario, data, cliente, idManga);
                         listaAvaliacoes.add(avaliacao);
@@ -187,6 +188,5 @@ public class Cliente extends Usuario {
     public void setCarrinhoCompras(CarrinhoDeCompras carrinhoCompras) {
         this.carrinhoCompras = carrinhoCompras;
     }
-    
-    
+     
 }

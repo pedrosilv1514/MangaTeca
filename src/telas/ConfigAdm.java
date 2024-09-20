@@ -664,7 +664,7 @@ public class ConfigAdm extends javax.swing.JFrame {
             txtPreco.setText(model.getValueAt(linha, 4).toString());
             txtEstoque.setText(model.getValueAt(linha, 5).toString());
             txtLinkImagem.setText(Sistema.procuraManga((Integer)(model.getValueAt(linha, 0))).getLinkImagem());
-            txtSinopse.setText(String.valueOf(Sistema.procuraManga((Integer)(model.getValueAt(linha, 0))).getEstoque()));
+            txtSinopse.setText(String.valueOf(Sistema.procuraManga((Integer)(model.getValueAt(linha, 0))).getSinopse()));
         }
     }//GEN-LAST:event_tableMangasMouseClicked
 

@@ -9,9 +9,11 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.*;
 
+//Classe que representa o carrinho de compras do cliente, que armazena informações dos mangás a serem comprados.
+
 public class CarrinhoDeCompras {
     private double total;
-    private ArrayList<Compras> produtos;
+    private ArrayList<Compras> produtos; //ArrayList de Compras, uma classe feita para representar os mangás no carrinho e acessá-los sem dificuldade.
 
     public CarrinhoDeCompras() {
         this.total = 0.0;
@@ -32,40 +34,19 @@ public class CarrinhoDeCompras {
         boolean itemEncontrado = false;
         for (Compras compra : produtos) {
             if (compra.getId() == manga.getId()) {
-                compra.setQuantidade(compra.getQuantidade() + 1); // Aumenta a quantidade
+                compra.setQuantidade(compra.getQuantidade() + 1); // Se o mangá já estiver no carrinho, sua quantidade será aumentada em 1.
                 itemEncontrado = true;
                 break;
             }
         }
         if (!itemEncontrado) {
-            produtos.add(new Compras(manga.getId(), manga.getTitulo(), 1, LocalDate.now(), manga.getPreco()));
+            produtos.add(new Compras(manga.getId(), manga.getTitulo(), 1, LocalDate.now(), manga.getPreco()));//Se o produto não for encontrado no carrinho, será adicionado manualmente com a instanciação de um novo mangá.
         }
-        total += manga.getPreco(); // Atualiza o total
-
-        // Imprime todos os produtos no carrinho
-        System.out.println("Carrinho atualizado:");
-        for (Compras compra : produtos) {
-            System.out.println("ID: " + compra.getId() +
-                               ", Nome: " + compra.getNomeManga() +
-                               ", Quantidade: " + compra.getQuantidade() +
-                               ", Preço: R$ " + compra.getPreco());
-        }
-        System.out.println("Subtotal atual: R$ " + total);
-    }
-
-    public void removerManga(Manga manga) {
-        for (int i = 0; i < produtos.size(); i++) {
-            Compras compra = produtos.get(i);
-            if (compra.getId() == manga.getId()) {
-                total -= manga.getPreco() * compra.getQuantidade(); // Atualiza o total
-                produtos.remove(i);
-                break;
-            }
-        }
+        total += manga.getPreco();
     }
 
     public void finalizarCompra(String nomeUsuario, ArrayList<Compras> compras) {
-        // Lógica para finalizar a compra, por exemplo, salvar em um banco de dados ou gerar um recibo
+        // Função para finalizar a compra, adicionando os mangás ao histórico de compras do cliente e deduzindo do estoque a quantia de mangás comprados.
         File pastaUsuarios = new File("./dados/usuarios/");
         if (!pastaUsuarios.exists()) {
             pastaUsuarios.mkdirs(); // Cria a pasta se ela não existir
@@ -97,15 +78,15 @@ public class CarrinhoDeCompras {
                         if (!historicoCompras.equals("[]")){
                             historicoCompras = historicoCompras.substring(1, historicoCompras.length() - 1); // Remove os colchetes iniciais e finais
                             String[] parts = historicoCompras.split("(?<=\\}),\\s(?=\\{)"); // Divide em partes, separando por { e }
-                            ArrayList<Hashtable<String, String>> hashtables = new ArrayList<>(); // arraylist que vai ter hashtables das compras
+                            ArrayList<Hashtable<String, String>> hashtables = new ArrayList<>(); // Arraylist que vai ter hashtables das compras
                             for (String part : parts) {
                                 part = part.trim(); // Remove espaços em branco extras
                                 part = part.substring(1, part.length() - 1); // Remove colchetes de cada parte
                                 Hashtable<String, String> hashtable = new Hashtable<>(); // Converte a string para um Hashtable
-                                String[] keyValuePairs = part.split(",\\s*"); // vai separar os valores da string por vírgula
+                                String[] keyValuePairs = part.split(",\\s*"); // Vai separar os valores da string por vírgula
                                 for (String pair : keyValuePairs) {
-                                    String[] keyValue = pair.split("=");
-                                    hashtable.put(keyValue[0].trim(), keyValue[1].trim());
+                                    String[] keyValue = pair.split("="); //Separa key e valor por "="
+                                    hashtable.put(keyValue[0].trim(), keyValue[1].trim()); //Coloca os valores na hashtable
                             }
                             hashtables.add(hashtable);
                         }

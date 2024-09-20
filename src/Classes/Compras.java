@@ -2,12 +2,14 @@ package Classes;
 
 import java.time.LocalDate;
 
+//Classe criada para facilitar o manuseio do histórico de compras, reduzindo os mangás apenas a seu id e nome.
+
 public class Compras {
     protected int id;
     protected String nomeManga;
     protected int quantidade;
     protected LocalDate data;
-    protected double preco;  // Adiciona o atributo preco
+    protected double preco;  
 
     // Atualiza o construtor para aceitar o novo parâmetro preco
     public Compras(int id, String nomeManga, int quantidade, LocalDate data, double preco) {

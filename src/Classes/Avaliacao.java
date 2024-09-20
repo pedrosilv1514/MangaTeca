@@ -1,6 +1,7 @@
 package Classes;
 import java.time.LocalDate;
-import java.util.*;
+
+//Classe que representa as avaliações que os clientes dão aos mangás.
 
 public class Avaliacao {
     protected int nota;
@@ -9,7 +10,7 @@ public class Avaliacao {
     protected Cliente cliente;
     protected int idManga;
     
-    public Avaliacao(){}
+    public Avaliacao(){} //Construtor vazio para caso seja necessário utilizar apenas os métodos da classe.
     
     public Avaliacao(int nota, String comentario, LocalDate data, Cliente cliente, int idManga){
         this.nota = nota;

@@ -5,10 +5,10 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.*;
 
+//A principal classe do aplicativo. Realiza um pouco de tudo, sempre utilizando os CSVs para armazenar os dados. 
+//Todos os métodos são estáticos para não necessitarem uma instância do sistema cada vez que forem utilizados.
+
 public class Sistema {
-    protected static ArrayList<Usuario> usuarios = new ArrayList<>();
-    protected static ArrayList<Manga> mangas = new ArrayList<>();
-    
     private static String csvUsuarios = "./dados/Usuarios.csv"; // Diretório do arquivo contendo os usuários
     private static String csvMangas = "./dados/Mangas.csv"; // Diretório do arquivo contendo os mangás
     
@@ -17,7 +17,7 @@ public class Sistema {
         ArrayList<Hashtable<String, String>> lista = new ArrayList<>();
         try {
             // Abrir o leitor
-            BufferedReader reader = new BufferedReader(new FileReader(csvUsuarios));
+            BufferedReader reader = new BufferedReader(new FileReader(csvUsuarios,StandardCharsets.ISO_8859_1));
             String linha;
             boolean primeiraLinha = true;
             while ((linha = reader.readLine()) != null) {
@@ -40,6 +40,7 @@ public class Sistema {
     }
 
     public static Manga procuraManga(int id){
+        //Procura um mangá utilizando um id como parâmetro de busca.
         Manga manga = new Manga();
         for(Manga m : Sistema.ListarMangas()){
             if(m.getId() == id){
@@ -51,6 +52,7 @@ public class Sistema {
     }
     
     public static List<Manga> getTop3(){
+        //Método para pegar os 3 mangás com maior avaliação no sistema.
         List<Manga> top3 = new ArrayList<>();
         ArrayList<Manga> mangasDisponiveis = new ArrayList<>();
         for(Manga manga : Sistema.ListarMangas()){
@@ -58,6 +60,7 @@ public class Sistema {
                 mangasDisponiveis.add(manga);
             }
         }
+        //Bubble sort para definir a ordem de saída.
         for (int i = 0; i < mangasDisponiveis.size() - 1; i++) {
             for (int j = 0; j < mangasDisponiveis.size() - 1 - i; j++) {
                 if (mangasDisponiveis.get(j).calcularMedia(mangasDisponiveis.get(j).getAvaliacoes()) < mangasDisponiveis.get(j + 1).calcularMedia(mangasDisponiveis.get(j+1).getAvaliacoes())) {
@@ -67,12 +70,12 @@ public class Sistema {
                 }
             }
         }
-        top3 = mangasDisponiveis.subList(0, Math.min(3, mangasDisponiveis.size()));
+        top3 = mangasDisponiveis.subList(0, Math.min(3, mangasDisponiveis.size()));//Reduz a lista aos 3 primeiros mangás da lista.
         return top3;
     }
     
-    // Método para listar os mangás do sistema
     public static ArrayList<Manga> ListarMangas() {
+        // Método para listar os mangás do sistema.
         ArrayList<Manga> mangas = new ArrayList<>();
         boolean existe = new File(csvMangas).exists();
         if (!existe){
@@ -80,7 +83,7 @@ public class Sistema {
         }
         try {
             // Abrir o leitor
-            BufferedReader reader = new BufferedReader(new FileReader(csvMangas));
+            BufferedReader reader = new BufferedReader(new FileReader(csvMangas,StandardCharsets.ISO_8859_1));
             String linha;
             boolean primeiraLinha = true;
             while ((linha = reader.readLine()) != null) {
@@ -88,8 +91,8 @@ public class Sistema {
                     primeiraLinha = false;
                     continue;
                 }
-                String[] partes = linha.split(";"); // linha separada por ;
-                ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<>();
+                String[] partes = linha.split(";"); // Linha separada por ;, que é a forma escolhida de separação dos CSVs do projeto.
+                ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<>();// Lista de avaliações do mangá.
                 int id = Integer.parseInt(partes[0]);
                 String titulo = partes[1];
                 String sinopse = partes[2];
@@ -103,23 +106,23 @@ public class Sistema {
                     avaliacoes = avaliacoes.substring(1, avaliacoes.length() - 1); // Remove os colchetes iniciais e finais
                     String[] parts = avaliacoes.split("(?<=\\}),\\s(?=\\{)"); // Divide em partes, separando por { e }
                     ArrayList<Hashtable<String, String>> hashtables = new ArrayList<>(); // arraylist que vai ter hashtables das avaliações
-                for (String part : parts) {
-                    part = part.trim(); // Remove espaços em branco extras
-                    part = part.substring(1, part.length() - 1); // Remove colchetes de cada parte
-                    Hashtable<String, String> hashtable = new Hashtable<>(); // Converte a string para um Hashtable
-                    String[] keyValuePairs = part.split(",\\s*"); // vai separar os valores da string por vírgula
-                    for (String pair : keyValuePairs) {
-                        String[] keyValue = pair.split("=");
-                        hashtable.put(keyValue[0].trim(), keyValue[1].trim());
-                    }
-                    hashtables.add(hashtable);
-                }
-                for (Hashtable<String, String> hashtable : hashtables) {
-                    Cliente cliente = new Cliente();
-                    cliente.setNomeUsuario(hashtable.get("cliente"));
-                    Avaliacao avaliacao = new Avaliacao(Integer.parseInt(hashtable.get("nota")), hashtable.get("comentario"), LocalDate.parse(hashtable.get("data")), cliente, id);
-                    listaAvaliacoes.add(avaliacao);
-                }
+                        for (String part : parts) {
+                            part = part.trim(); // Remove espaços em branco extras
+                            part = part.substring(1, part.length() - 1); // Remove colchetes de cada parte
+                            Hashtable<String, String> hashtable = new Hashtable<>(); // Converte a string para um Hashtable
+                            String[] keyValuePairs = part.split(",\\s*"); // Vai separar os valores da string por vírgula
+                            for (String pair : keyValuePairs) {
+                                String[] keyValue = pair.split("=");
+                                hashtable.put(keyValue[0].trim(), keyValue[1].trim());
+                            }
+                            hashtables.add(hashtable);
+                        }
+                        for (Hashtable<String, String> hashtable : hashtables) {
+                            Cliente cliente = new Cliente(); //Instancia um cliente apenas para o construtor da avaliacao, que utiliza o NomeUsuario do cliente.
+                            cliente.setNomeUsuario(hashtable.get("cliente"));
+                            Avaliacao avaliacao = new Avaliacao(Integer.parseInt(hashtable.get("nota")), hashtable.get("comentario"), LocalDate.parse(hashtable.get("data")), cliente, id);
+                            listaAvaliacoes.add(avaliacao);
+                        }
                 }
 
                 if (partes[3].equals("Romance")) {
@@ -153,6 +156,7 @@ public class Sistema {
     }
     
     public static void alterarCadastro(String nomeAntigo, String emailAntigo, String nomeNovo, String emailNovo, String senhaNova){
+        //Método para alterar o cadastro do cliente. Não é possível alterar o cadastro do administrador.
         String linha;
         ArrayList<String> linhasRestantes = new ArrayList<>();
         File arquivoUsuarios = new File("./dados/Usuarios.csv");
@@ -190,43 +194,5 @@ public class Sistema {
         } catch (IOException e){
             e.printStackTrace();
         }
-    }
-    // Construtor da classe Sistema
-    public Sistema(ArrayList<Usuario> usuarios, ArrayList<Manga> mangas) {
-        Sistema.usuarios = usuarios;
-        Sistema.mangas = mangas;
-    }
-
-    // Construtor padrão
-    public Sistema() {}
-
-    // Adicionar um usuário ao ArrayList de usuários
-    public static void addUsuario(Usuario usuario) {
-        usuarios.add(usuario);
-    }
-
-    // Obter a lista de usuários
-    public static List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    // Definir a lista de usuários
-    public void setUsuarios(ArrayList<Usuario> usuarios) {
-        Sistema.usuarios = usuarios;
-    }
-
-    // Obter a lista de mangás
-    public List<Manga> getMangas() {
-        return mangas;
-    }
-
-    // Definir a lista de mangás
-    public void setMangas(ArrayList<Manga> mangas) {
-        Sistema.mangas = mangas;
-    }
-
-    // Autenticar um usuário (ainda precisa ser implementado)
-    public Usuario Autenticar(String email, String senha) {
-        return new Usuario(""); // temporário, até que seja implementado
     }
 }

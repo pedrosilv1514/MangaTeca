@@ -4,11 +4,13 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import javax.swing.JOptionPane;
 
+//Superclasse que representa os usuários que utilizam o aplicativo.
+
 public class Usuario {
     private String NomeUsuario;
-    protected String email;
-    protected String senha;
-    private CarrinhoDeCompras carrinhoDeCompras; // Adicionado
+    private String email;
+    private String senha;
+    private CarrinhoDeCompras carrinhoDeCompras;
 
     // Construtor que recebe o nome do usuário
     public Usuario(String NomeUsuario) {
@@ -17,7 +19,7 @@ public class Usuario {
         criarArquivoCSV();
     }
 
-    // Construtor sem argumentos (não utilizado atualmente, mas pode ser necessário)
+    // Construtor sem argumentos, apenas para utilizar métodos específicos do cliente ou administrador
     public Usuario() {}
     
     // Método para cadastrar um novo usuário
@@ -53,6 +55,7 @@ public class Usuario {
                 if (!existe) {
                     writer.write("NomeUsuario;Email;Senha\n");
                     writer.write("Administrador;administrador@mangateca.com;administrador\n");
+                    //O administrador é adicionado automaticamente caso o arquivo de usuarios não existia.
                 }
                 writer.write(NomeUsuario + ";" + email + ";" + senha + "\n");
                 writer.flush();
@@ -72,8 +75,8 @@ public class Usuario {
         }
     }
 
-    // Método para logar um usuário
     public static Usuario Logar(String email, String senha) {
+        // Método para logar um usuário
         boolean Cadastrado = false;
         boolean existe = new File("./dados/usuarios.csv").exists();
         Usuario usuario = null;
@@ -119,8 +122,8 @@ public class Usuario {
         return usuario;
     }
 
-    // Método para salvar os dados do usuário em um arquivo CSV individual
     public static void salvarDadosUsuario(Usuario usuario) {
+        // Método para salvar os dados do usuário em um arquivo CSV individual
         File pastaUsuarios = new File("./dados/usuarios/");
         if (!pastaUsuarios.exists()) {
             pastaUsuarios.mkdirs();
@@ -140,14 +143,11 @@ public class Usuario {
         }
     }
 
-    // Método para criar o arquivo CSV específico para o usuário
     private void criarArquivoCSV() {
+        // Método para criar o arquivo CSV específico para o usuário
         File pastaUsuarios = new File("./dados/usuarios/");
         if (!pastaUsuarios.exists()) {
             pastaUsuarios.mkdirs(); // Cria a pasta se ela não existir
-            //System.out.println("Pasta criada: " + pastaUsuarios.getAbsolutePath());
-        } else {
-            //System.out.println("Pasta já existe: " + pastaUsuarios.getAbsolutePath());
         }
 
         File arquivoUsuario = new File(pastaUsuarios, this.NomeUsuario + ".csv");
@@ -159,17 +159,13 @@ public class Usuario {
                     writer.write("null;null;null;null;null;[]\n");
                     writer.flush();
                     writer.close();
-                    System.out.println("Arquivo criado: " + arquivoUsuario.getAbsolutePath());
                 }
-            } else {
-                System.out.println("Arquivo já existe: " + arquivoUsuario.getAbsolutePath());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Adiciona o carrinho de compras
     public CarrinhoDeCompras getCarrinhoDeCompras() {
         return carrinhoDeCompras;
     }
@@ -178,7 +174,6 @@ public class Usuario {
         this.carrinhoDeCompras = carrinhoDeCompras;
     }
 
-    // Getters e Setters
     public String getNomeUsuario() {
         return NomeUsuario;
     }

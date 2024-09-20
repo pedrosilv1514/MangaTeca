@@ -22,7 +22,7 @@
 <p>Consiste em um sistema de avaliações de mangás com foco didático, desenvolvido para o projeto final da disciplina de Técnicas de Programação 1 da <a href="https://www.unb.br" target="_blank">Universidade de Brasília</a>.</p>
 
 <p>Diagrama de classes:</p>
-<img alt="Diagrama de Classes" src="Diagrama MangaTeca.jpeg"/>
+<img alt="Diagrama de Classes" src="Diagrama UML MangaTeca.jpeg"/>
 
 
 ---

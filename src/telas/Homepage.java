@@ -6,12 +6,13 @@ import Classes.CarrinhoDeCompras;
 import Classes.Cliente;
 import Classes.Compras;
 import Classes.Sistema;
-import Classes.Usuario;
 import Classes.UsuarioLogado;
 import Classes.Manga;
 import Classes.Status;
 import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -28,10 +29,30 @@ public class Homepage extends javax.swing.JFrame {
     
     UsuarioLogado usuarioLogado = UsuarioLogado.getInstance();
     String nomeUsuario = usuarioLogado.getUsuario() != null ? usuarioLogado.getUsuario().getNomeUsuario() : "Usuário não logado";
-    public Homepage() throws IOException {
-        
-        carrinho = new CarrinhoDeCompras();
-               
+    private void atualizarTabela(String filtro) {
+        //Função para atualizar a tabela cada vez que uma tecla for digitada no campo de pesquisa
+        DefaultTableModel modelo = (DefaultTableModel) tblMangas.getModel();
+        modelo.setRowCount(0);
+
+        // Filtrar os mangás com base no que o usuário digita
+        for (Manga manga : Sistema.ListarMangas()) {
+            if ((manga.getStatus()).equals(Status.valueOf("DISPONIVEL"))&&manga.getTitulo().toLowerCase().contains(filtro.toLowerCase())) {
+                modelo.addRow(new Object[]{manga.getId(),
+                    manga.getTitulo(),
+                    manga.getGenero().getTipo(),
+                    manga.getAutor(),
+                    manga.getPreco(),
+                    manga.getEstoque()});
+            }
+        }
+    }
+    Manga manga1; //Mangá top 1, está sendo definido aqui para que o usuário possa clicar na imagem dele e ser direcionado para o mesmo;
+    Manga manga2; //Mangá top 2, está sendo definido aqui para que o usuário possa clicar na imagem dele e ser direcionado para o mesmo;
+    Manga manga3; //Mangá top 3, está sendo definido aqui para que o usuário possa clicar na imagem dele e ser direcionado para o mesmo.
+        public Homepage() throws IOException {
+        //Iniciando o carrinho de compras aqui para poder usar como argumento na abertura da tela do carrinho
+        carrinho = new CarrinhoDeCompras(); 
+             
         initComponents();
         btnAvaliar.setVisible(false);
         scrollAvaliacoes.setVisible(false);
@@ -46,9 +67,9 @@ public class Homepage extends javax.swing.JFrame {
             for(Manga m : top3){
                 System.out.println(m);
             }
-            Manga manga1 = top3.get(0);
-            Manga manga2 = top3.get(1);
-            Manga manga3 = top3.get(2);
+            manga1 = top3.get(0);
+            manga2 = top3.get(1);
+            manga3 = top3.get(2);
             ImageIcon icon1 = new ImageIcon(new URL(manga1.getLinkImagem()));
             ImageIcon icon2 = new ImageIcon(new URL(manga2.getLinkImagem()));
             ImageIcon icon3 = new ImageIcon(new URL(manga3.getLinkImagem()));
@@ -99,7 +120,7 @@ public class Homepage extends javax.swing.JFrame {
         public boolean isCellEditable(int row, int column) {
            return false;
         }
-    };
+    };  
         model.addColumn("ID");
         model.addColumn("Título");
         model.addColumn("Gênero");
@@ -108,7 +129,8 @@ public class Homepage extends javax.swing.JFrame {
         model.addColumn("Estoque");
 
         for (Manga manga : listaMangas) {
-            if ((manga.getStatus()).equals(Status.valueOf("DISPONIVEL"))){
+            if ((manga.getStatus()).equals(Status.valueOf("DISPONIVEL"))){ 
+                //Todo mangá com status de disponivel será adicionado à lista
                 model.addRow(new Object[]{
                     manga.getId(),
                     manga.getTitulo(),
@@ -119,39 +141,17 @@ public class Homepage extends javax.swing.JFrame {
                 });
             }
         }
-        
         tblMangas.setModel(model);
-    
+        txtProcurar.addKeyListener(new KeyAdapter() {
+            //Key listener para reconhecer toda tecla que o usuário digitar na barra de pesquisa,
+            //e atualizará a table de mangás conforme o filtro.
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    atualizarTabela(txtProcurar.getText());
+                }
+            });
     }
-    
-    private void adicionarAoCarrinho() {
-        int selectedRow = tblMangas.getSelectedRow();
-        if (selectedRow >= 0) {
-            int id = (Integer) tblMangas.getValueAt(selectedRow, 0);
-            String titulo = (String) tblMangas.getValueAt(selectedRow, 1);
-            double preco = (Double) tblMangas.getValueAt(selectedRow, 4);
-            int estoque = (Integer) tblMangas.getValueAt(selectedRow, 5);
-
-            Manga manga = Sistema.procuraManga(id);
-            if(manga.getEstoque() != 0){
-                carrinho.adicionarManga(manga);
-                Administrador admin = new Administrador();
-                Manga mangaNovo = manga;
-                mangaNovo.setEstoque(manga.getEstoque()-1);
-                admin.atualizarManga(manga, manga);
-                tblMangas.setValueAt(estoque-1,selectedRow, 5);
-                // Impressão de depuração
-                System.out.println("Adicionado ao carrinho: ID=" + id + ", Titulo=" + titulo + ", Preco=" + preco);
-
-                JOptionPane.showMessageDialog(this, "Manga adicionado ao carrinho!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Este mangá está fora de estoque!");
-            }
-            
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione um manga para adicionar ao carrinho.");
-        }
-    }
+        
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -167,11 +167,14 @@ public class Homepage extends javax.swing.JFrame {
         btnCarrinho = new javax.swing.JToggleButton();
         btnGerenciador = new javax.swing.JToggleButton();
         txtProcurar = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         pnlManga2 = new javax.swing.JPanel();
         lblManga2 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         pnlManga1 = new javax.swing.JPanel();
         lblManga1 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        pnlManga3 = new javax.swing.JPanel();
         lblManga3 = new javax.swing.JLabel();
         scrollMangas = new javax.swing.JScrollPane();
         tblMangas = new javax.swing.JTable();
@@ -187,7 +190,6 @@ public class Homepage extends javax.swing.JFrame {
         lblNotaManga3 = new javax.swing.JLabel();
         lblImagemManga = new javax.swing.JLabel();
         lblModo = new javax.swing.JLabel();
-        sinopseSelecionado = new javax.swing.JLabel();
         btnAvaliacoes = new javax.swing.JToggleButton();
         btnAdicionarCarrinho = new javax.swing.JToggleButton();
         lblAutor = new javax.swing.JLabel();
@@ -196,6 +198,8 @@ public class Homepage extends javax.swing.JFrame {
         scrollAvaliacoes = new javax.swing.JScrollPane();
         tblAvaliacoes = new javax.swing.JTable();
         btnAvaliar = new javax.swing.JToggleButton();
+        scrllSinopse = new javax.swing.JScrollPane();
+        sinopseSelecionado = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Homepage");
@@ -290,30 +294,49 @@ public class Homepage extends javax.swing.JFrame {
 
         telaInicial.add(jPanel2);
         jPanel2.setBounds(0, 0, 1230, 60);
-
-        txtProcurar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtProcurarActionPerformed(evt);
-            }
-        });
         telaInicial.add(txtProcurar);
-        txtProcurar.setBounds(610, 410, 580, 22);
+        txtProcurar.setBounds(610, 420, 580, 22);
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/silver crown.png"))); // NOI18N
+        telaInicial.add(jLabel6);
+        jLabel6.setBounds(120, 50, 90, 70);
 
         pnlManga2.setToolTipText("");
+        pnlManga2.setLayout(null);
 
-        javax.swing.GroupLayout pnlManga2Layout = new javax.swing.GroupLayout(pnlManga2);
-        pnlManga2.setLayout(pnlManga2Layout);
-        pnlManga2Layout.setHorizontalGroup(
-            pnlManga2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblManga2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-        );
-        pnlManga2Layout.setVerticalGroup(
-            pnlManga2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblManga2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-        );
+        lblManga2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblManga2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblManga2MouseEntered(evt);
+            }
+        });
+        pnlManga2.add(lblManga2);
+        lblManga2.setBounds(0, 0, 190, 200);
 
         telaInicial.add(pnlManga2);
-        pnlManga2.setBounds(70, 80, 190, 200);
+        pnlManga2.setBounds(70, 100, 190, 200);
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/copper crown.png"))); // NOI18N
+        telaInicial.add(jLabel2);
+        jLabel2.setBounds(990, 50, 90, 70);
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/gold crown.png"))); // NOI18N
+        telaInicial.add(jLabel4);
+        jLabel4.setBounds(550, 50, 90, 70);
+
+        lblManga1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblManga1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblManga1MouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlManga1Layout = new javax.swing.GroupLayout(pnlManga1);
         pnlManga1.setLayout(pnlManga1Layout);
@@ -331,21 +354,30 @@ public class Homepage extends javax.swing.JFrame {
         );
 
         telaInicial.add(pnlManga1);
-        pnlManga1.setBounds(500, 80, 190, 200);
+        pnlManga1.setBounds(500, 100, 190, 200);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        lblManga3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblManga3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblManga3MouseEntered(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlManga3Layout = new javax.swing.GroupLayout(pnlManga3);
+        pnlManga3.setLayout(pnlManga3Layout);
+        pnlManga3Layout.setHorizontalGroup(
+            pnlManga3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblManga3, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlManga3Layout.setVerticalGroup(
+            pnlManga3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblManga3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
 
-        telaInicial.add(jPanel7);
-        jPanel7.setBounds(940, 80, 190, 200);
+        telaInicial.add(pnlManga3);
+        pnlManga3.setBounds(940, 100, 190, 200);
 
         tblMangas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -376,72 +408,68 @@ public class Homepage extends javax.swing.JFrame {
         scrollMangas.setViewportView(tblMangas);
 
         telaInicial.add(scrollMangas);
-        scrollMangas.setBounds(610, 440, 580, 190);
+        scrollMangas.setBounds(610, 450, 580, 190);
 
         lblMangaSelecionado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblMangaSelecionado.setForeground(new java.awt.Color(255, 255, 255));
         lblMangaSelecionado.setText("Mangá");
         telaInicial.add(lblMangaSelecionado);
-        lblMangaSelecionado.setBounds(360, 360, 230, 25);
+        lblMangaSelecionado.setBounds(360, 370, 230, 25);
 
         nomeManga2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeManga2.setForeground(new java.awt.Color(255, 255, 255));
         telaInicial.add(nomeManga2);
-        nomeManga2.setBounds(70, 290, 140, 0);
+        nomeManga2.setBounds(70, 310, 140, 20);
 
         nomeManga1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeManga1.setForeground(new java.awt.Color(255, 255, 255));
         telaInicial.add(nomeManga1);
-        nomeManga1.setBounds(500, 290, 150, 0);
+        nomeManga1.setBounds(500, 310, 150, 20);
 
         nomeManga3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeManga3.setForeground(new java.awt.Color(255, 255, 255));
         telaInicial.add(nomeManga3);
-        nomeManga3.setBounds(940, 290, 140, 0);
+        nomeManga3.setBounds(940, 310, 140, 20);
 
         lblNotaManga2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNotaManga2.setForeground(new java.awt.Color(255, 255, 255));
         lblNotaManga2.setText("0.0");
         telaInicial.add(lblNotaManga2);
-        lblNotaManga2.setBounds(210, 290, 40, 20);
+        lblNotaManga2.setBounds(210, 310, 40, 20);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Star.png"))); // NOI18N
         telaInicial.add(jLabel3);
-        jLabel3.setBounds(240, 290, 24, 22);
+        jLabel3.setBounds(240, 310, 24, 22);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Star.png"))); // NOI18N
         telaInicial.add(jLabel5);
-        jLabel5.setBounds(690, 290, 24, 22);
+        jLabel5.setBounds(680, 310, 24, 22);
 
         lblNotaManga1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNotaManga1.setForeground(new java.awt.Color(255, 255, 255));
         lblNotaManga1.setText("0.0");
         telaInicial.add(lblNotaManga1);
-        lblNotaManga1.setBounds(650, 290, 40, 20);
+        lblNotaManga1.setBounds(650, 310, 40, 20);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Star.png"))); // NOI18N
         telaInicial.add(jLabel7);
-        jLabel7.setBounds(1120, 290, 24, 22);
+        jLabel7.setBounds(1110, 310, 24, 22);
 
         lblNotaManga3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNotaManga3.setForeground(new java.awt.Color(255, 255, 255));
         lblNotaManga3.setText("0.0");
         telaInicial.add(lblNotaManga3);
-        lblNotaManga3.setBounds(1080, 290, 40, 20);
+        lblNotaManga3.setBounds(1080, 310, 40, 20);
 
         lblImagemManga.setForeground(new java.awt.Color(255, 255, 255));
         telaInicial.add(lblImagemManga);
-        lblImagemManga.setBounds(30, 370, 300, 340);
+        lblImagemManga.setBounds(30, 380, 300, 340);
 
         lblModo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblModo.setForeground(new java.awt.Color(255, 255, 255));
         lblModo.setText("Procurar Mangás no Acervo");
         telaInicial.add(lblModo);
-        lblModo.setBounds(610, 370, 260, 25);
-
-        sinopseSelecionado.setForeground(new java.awt.Color(255, 255, 255));
-        telaInicial.add(sinopseSelecionado);
-        sinopseSelecionado.setBounds(360, 410, 190, 190);
+        lblModo.setBounds(610, 380, 260, 25);
 
         btnAvaliacoes.setBackground(new java.awt.Color(218, 0, 55));
         btnAvaliacoes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -454,7 +482,7 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
         telaInicial.add(btnAvaliacoes);
-        btnAvaliacoes.setBounds(380, 700, 190, 40);
+        btnAvaliacoes.setBounds(380, 710, 190, 40);
 
         btnAdicionarCarrinho.setBackground(new java.awt.Color(218, 0, 55));
         btnAdicionarCarrinho.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -467,18 +495,18 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
         telaInicial.add(btnAdicionarCarrinho);
-        btnAdicionarCarrinho.setBounds(380, 650, 190, 40);
+        btnAdicionarCarrinho.setBounds(380, 660, 190, 40);
 
         lblAutor.setForeground(new java.awt.Color(255, 255, 255));
         lblAutor.setText("Autor");
         telaInicial.add(lblAutor);
-        lblAutor.setBounds(360, 390, 150, 16);
+        lblAutor.setBounds(360, 400, 150, 16);
 
         lblPreco.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblPreco.setForeground(new java.awt.Color(51, 204, 0));
         lblPreco.setText("0.0");
         telaInicial.add(lblPreco);
-        lblPreco.setBounds(430, 610, 80, 30);
+        lblPreco.setBounds(430, 620, 80, 30);
 
         btnVoltar.setBackground(new java.awt.Color(218, 0, 55));
         btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -491,7 +519,7 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
         telaInicial.add(btnVoltar);
-        btnVoltar.setBounds(990, 640, 190, 40);
+        btnVoltar.setBounds(990, 650, 190, 40);
 
         tblAvaliacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -522,7 +550,7 @@ public class Homepage extends javax.swing.JFrame {
         scrollAvaliacoes.setViewportView(tblAvaliacoes);
 
         telaInicial.add(scrollAvaliacoes);
-        scrollAvaliacoes.setBounds(610, 440, 580, 190);
+        scrollAvaliacoes.setBounds(610, 450, 580, 190);
 
         btnAvaliar.setBackground(new java.awt.Color(218, 0, 55));
         btnAvaliar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -535,7 +563,22 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
         telaInicial.add(btnAvaliar);
-        btnAvaliar.setBounds(780, 640, 190, 40);
+        btnAvaliar.setBounds(780, 650, 190, 40);
+
+        scrllSinopse.setBackground(new java.awt.Color(23, 23, 23));
+        scrllSinopse.setBorder(null);
+
+        sinopseSelecionado.setEditable(false);
+        sinopseSelecionado.setBackground(new java.awt.Color(23, 23, 23));
+        sinopseSelecionado.setBorder(null);
+        sinopseSelecionado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sinopseSelecionado.setForeground(new java.awt.Color(255, 255, 255));
+        sinopseSelecionado.setRequestFocusEnabled(false);
+        sinopseSelecionado.setVerifyInputWhenFocusTarget(false);
+        scrllSinopse.setViewportView(sinopseSelecionado);
+
+        telaInicial.add(scrllSinopse);
+        scrllSinopse.setBounds(360, 430, 220, 180);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -552,11 +595,8 @@ public class Homepage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProcurarActionPerformed
-        System.out.println("a");
-    }//GEN-LAST:event_txtProcurarActionPerformed
-
     private void btnAvaliacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvaliacoesActionPerformed
+        //Se o usuário for um administrador, não poderá fazer avaliações.
         if("Administrador".equals(nomeUsuario)){
             btnAvaliar.setVisible(false);
         } else{
@@ -569,10 +609,10 @@ public class Homepage extends javax.swing.JFrame {
         scrollAvaliacoes.setVisible(true);
         tblAvaliacoes.setVisible(true);
         DefaultTableModel model = new DefaultTableModel(){
-            /*@Override
+            @Override
             public boolean isCellEditable(int row, int column) {
                return false;
-            }*/
+            }
         };
     
         model.addColumn("Usuário");
@@ -584,73 +624,82 @@ public class Homepage extends javax.swing.JFrame {
         for (Avaliacao avaliacao : avaliacoes) {
                 model.addRow(new Object[]{
                     avaliacao.getCliente(),
-                    avaliacao.getComentario().replace("|", ","),
+                    avaliacao.getComentario().replace("|", ","),//Substituindo os "|" no csv por vírgula
                     avaliacao.getNota(),
                     avaliacao.getData(),
             });
         }
         tblAvaliacoes.setModel(model);
         btnVoltar.setVisible(true);
-        
     }//GEN-LAST:event_btnAvaliacoesActionPerformed
 
     private void btnAdicionarCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarCarrinhoActionPerformed
-        // Carrinho
-        adicionarAoCarrinho();
+        //Adicionará um mangá ao carrinho, sendo pela linha 
+        //que estiver selecionada na tabela de mangás disponíveis.
+        int selectedRow = tblMangas.getSelectedRow();
+        if (selectedRow >= 0) {
+            int id = (Integer) tblMangas.getValueAt(selectedRow, 0);
+            String titulo = (String) tblMangas.getValueAt(selectedRow, 1);
+            double preco = (Double) tblMangas.getValueAt(selectedRow, 4);
+            int estoque = (Integer) tblMangas.getValueAt(selectedRow, 5);
+
+            Manga manga = Sistema.procuraManga(id);
+            if(manga.getEstoque() != 0){
+                carrinho.adicionarManga(manga);
+                Administrador admin = new Administrador(); //Instanciando um novo administrador para poder atualizar o mangá no csv, pois o casting de UsuarioLogado para Administrador não é possível
+                Manga mangaNovo = manga;
+                mangaNovo.setEstoque(manga.getEstoque()-1);
+                admin.atualizarManga(manga, manga);
+                tblMangas.setValueAt(estoque-1,selectedRow, 5);
+                JOptionPane.showMessageDialog(this, "Manga adicionado ao carrinho!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Este mangá está fora de estoque!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um mangá para adicionar ao carrinho.");
+        }
     }//GEN-LAST:event_btnAdicionarCarrinhoActionPerformed
 
     private void tblMangasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMangasMouseClicked
-        // Testes para tabela               
+        // Tabela clicável que servirá para mostrar os dados dos mangás na tela, além de possilibitar serem adicionados ao carrinho.              
         int selectedRow = tblMangas.getSelectedRow();
 
         if (selectedRow >= 0) {
-            // Pegue o valor da tabela baseado no modelo
             DefaultTableModel model = (DefaultTableModel) tblMangas.getModel();
-
-            // Pegando os valores de cada coluna
             String titulo = model.getValueAt(selectedRow, 1).toString();
             String genero = model.getValueAt(selectedRow, 2).toString();
             String autor = model.getValueAt(selectedRow, 3).toString();
             String preco = model.getValueAt(selectedRow, 4).toString();
             String estoque = model.getValueAt(selectedRow, 5).toString();
-
-            // Exibe esses valores nos JLabels, por exemplo:
             lblMangaSelecionado.setText(titulo);
             lblAutor.setText(autor);
             lblPreco.setText("R$" + preco);
-
-            // Pegue o link da imagem correspondente ao mangá selecionado
             String linkImagem; // Aqui você deve pegar o link da imagem do CSV para o mangá selecionado
             
             ArrayList<Manga> mangas = Sistema.ListarMangas();
             String ID = String.valueOf(model.getValueAt(selectedRow, 0));
             usuarioLogado.setIdSelecionado(Integer.parseInt(ID));
             
-            for(Manga m : mangas){
-                if(m.getId() == Integer.parseInt(ID)){
-                    linkImagem = m.getLinkImagem();
-                    String sinopse = m.getSinopse();
-                // Tente carregar a imagem a partir do link
-                try {
-                    URL url = new URL(linkImagem);
-                    ImageIcon iconOriginal = new ImageIcon(url);
-                    int larguraNova = 300;
-                    int alturaNova = 340;
-                    Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
-                    ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
-                    lblImagemManga.setIcon(iconRedimensionado); // Altere o JLabel para a imagem do mangá
-                    sinopseSelecionado.setText(sinopse);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                    break;
-                }
+            Manga m = Sistema.procuraManga(Integer.parseInt(ID));
+            linkImagem = m.getLinkImagem();
+            String sinopse = m.getSinopse();
+            try {
+                URL url = new URL(linkImagem);
+                ImageIcon iconOriginal = new ImageIcon(url);
+                int larguraNova = 300;
+                int alturaNova = 340;
+                Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
+                ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
+                lblImagemManga.setIcon(iconRedimensionado);
+                sinopseSelecionado.setText(sinopse);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }   
+        }  
     }//GEN-LAST:event_tblMangasMouseClicked
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
+        //Ao clicar o botão de voltar a tabela de avaliações será escondida e a de mangá voltará ao lugar.
         btnAvaliar.setVisible(false);
         tblMangas.setVisible(true);
         lblModo.setText("Procurar Mangás no Acervo");
@@ -667,7 +716,8 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_tblAvaliacoesMouseClicked
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
-         try{
+        //Abre a tela de perfil
+        try{
             Perfil perfil = new Perfil();
             perfil.setVisible(true);
             this.dispose();
@@ -677,9 +727,10 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnAvaliarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvaliarActionPerformed
+            //Abre a tela de avaliação se o cliente não tiver avaliado o mangá antes e se ele estiver em seu histórico de compras
             try {
                 UsuarioLogado usuarioLogado = UsuarioLogado.getInstance();
-                Cliente cliente = new Cliente();
+                Cliente cliente = new Cliente(); //Instanciando novo Cliente pois o casting de UsuarioLogado para Cliente não é possível.
                 cliente.setNomeUsuario(usuarioLogado.getUsuario().getNomeUsuario());
                 var historicoCompras = cliente.getHistoricoCompras();
                 boolean comprou = false;
@@ -740,23 +791,79 @@ public class Homepage extends javax.swing.JFrame {
         new ConfigAdm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGerenciadorActionPerformed
-    
-       public void mostrarInformacoesUsuario() {
-        Usuario usuarioLogado = UsuarioLogado.getInstance().getUsuario();
-        if (usuarioLogado != null) {
-            String nomeUsuario = usuarioLogado.getNomeUsuario();
-            if (nomeUsuario != null && !nomeUsuario.isEmpty()) {
-                lblNomeUsuario.setText("Bem-vindo, " + nomeUsuario);
-                System.out.println("Usuário logado: " + nomeUsuario); // Imprime no terminal
-            } else {
-                lblNomeUsuario.setText("Nenhum usuário logado");
-                System.out.println("Nome do usuário não encontrado"); // Imprime no terminal
+
+    private void lblManga2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManga2MouseClicked
+        //Possibilita o acesso aos dados do mangá top 2 clicando na imagem dele.
+        usuarioLogado.setIdSelecionado(manga2.getId());
+        lblMangaSelecionado.setText(manga2.getTitulo());
+        lblAutor.setText(manga2.getAutor());
+        lblPreco.setText("R$" + manga2.getPreco());
+        sinopseSelecionado.setText(manga2.getSinopse());
+        try {
+            URL url = new URL(manga2.getLinkImagem());
+            ImageIcon iconOriginal = new ImageIcon(url);
+            int larguraNova = 300;
+            int alturaNova = 340;
+            Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
+            ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
+            lblImagemManga.setIcon(iconRedimensionado); // Altere o JLabel para a imagem do mangá
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } else {
-            lblNomeUsuario.setText("Nenhum usuário logado");
-            System.out.println("Nenhum usuário logado"); // Imprime no terminal
-        }
-    }   
+        
+    }//GEN-LAST:event_lblManga2MouseClicked
+
+    private void lblManga1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManga1MouseClicked
+        //Possibilita o acesso aos dados do mangá top 1 clicando na imagem dele.
+        usuarioLogado.setIdSelecionado(manga1.getId());
+        lblMangaSelecionado.setText(manga1.getTitulo());
+        lblAutor.setText(manga1.getAutor());
+        lblPreco.setText("R$" + manga1.getPreco());
+        sinopseSelecionado.setText(manga1.getSinopse());
+        try {
+            URL url = new URL(manga1.getLinkImagem());
+            ImageIcon iconOriginal = new ImageIcon(url);
+            int larguraNova = 300;
+            int alturaNova = 340;
+            Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
+            ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
+            lblImagemManga.setIcon(iconRedimensionado); // Altere o JLabel para a imagem do mangá
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }//GEN-LAST:event_lblManga1MouseClicked
+
+    private void lblManga3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManga3MouseClicked
+        //Possibilita o acesso aos dados do mangá top 3 clicando na imagem dele.
+        usuarioLogado.setIdSelecionado(manga3.getId());
+        lblMangaSelecionado.setText(manga3.getTitulo());
+        lblAutor.setText(manga3.getAutor());
+        lblPreco.setText("R$" + manga3.getPreco());
+        sinopseSelecionado.setText(manga3.getSinopse());
+        try {
+            URL url = new URL(manga3.getLinkImagem());
+            ImageIcon iconOriginal = new ImageIcon(url);
+            int larguraNova = 300;
+            int alturaNova = 340;
+            Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(larguraNova, alturaNova, Image.SCALE_SMOOTH);
+            ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
+            lblImagemManga.setIcon(iconRedimensionado); // Altere o JLabel para a imagem do mangá
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }//GEN-LAST:event_lblManga3MouseClicked
+
+    private void lblManga2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManga2MouseEntered
+        lblManga2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Muda o mouse para a aparência de "botão clicável"
+    }//GEN-LAST:event_lblManga2MouseEntered
+
+    private void lblManga1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManga1MouseEntered
+        lblManga1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Muda o mouse para a aparência de "botão clicável"
+    }//GEN-LAST:event_lblManga1MouseEntered
+
+    private void lblManga3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManga3MouseEntered
+        lblManga3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Muda o mouse para a aparência de "botão clicável"
+    }//GEN-LAST:event_lblManga3MouseEntered
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -800,11 +907,13 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnPerfil;
     private javax.swing.JToggleButton btnVoltar;
     private javax.swing.JLabel iconUsuario;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel lblAutor;
     private javax.swing.JLabel lblImagemManga;
     private javax.swing.JLabel lblLogOut;
@@ -824,9 +933,11 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JPanel pnlLogOut;
     private javax.swing.JPanel pnlManga1;
     private javax.swing.JPanel pnlManga2;
+    private javax.swing.JPanel pnlManga3;
+    private javax.swing.JScrollPane scrllSinopse;
     private javax.swing.JScrollPane scrollAvaliacoes;
     private javax.swing.JScrollPane scrollMangas;
-    private javax.swing.JLabel sinopseSelecionado;
+    private javax.swing.JTextPane sinopseSelecionado;
     private javax.swing.JTable tblAvaliacoes;
     private javax.swing.JTable tblMangas;
     private javax.swing.JPanel telaInicial;

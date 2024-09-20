@@ -211,7 +211,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                      <Component id="nome" min="-2" pref="188" max="-2" attributes="0"/>
+                      <Component id="lblNomeUsuario" min="-2" pref="188" max="-2" attributes="0"/>
                       <EmptySpace pref="444" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -220,14 +220,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="nome" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNomeUsuario" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="269" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="nome">
+            <Component class="javax.swing.JLabel" name="lblNomeUsuario">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>

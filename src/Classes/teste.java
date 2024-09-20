@@ -4,6 +4,8 @@ import java.io.File;
 import java.time.*;
 import java.util.*;
 
+//Classe que foi utilizada apenas para testes no sistema, obsoleta.
+
 public class teste {
     public static void main(String[] args) {
         /*ArrayList<Compras> produtosCarrinho = new ArrayList<>();

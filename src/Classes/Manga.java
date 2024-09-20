@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+//Classe que representa o produto principal do aplicativo, os mangás (quadrinhos orientais).
+
 public class Manga {
     protected int id;
     protected String titulo;

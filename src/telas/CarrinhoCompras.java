@@ -6,7 +6,6 @@ import Classes.Compras;
 import Classes.Manga;
 import Classes.Sistema;
 import Classes.UsuarioLogado;
-import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,11 +13,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class CarrinhoCompras extends javax.swing.JFrame {
     private CarrinhoDeCompras carrinho;
-
+    UsuarioLogado usuarioLogado = UsuarioLogado.getInstance();
+    String nomeUsuario = usuarioLogado.getUsuario() != null ? usuarioLogado.getUsuario().getNomeUsuario() : "Usuário não logado";
     public CarrinhoCompras(CarrinhoDeCompras carrinho) {
         this.carrinho = carrinho;
         initComponents();
-        imprimirCarrinho();
+        lblNomeUsuario.setText(nomeUsuario);
         carregarCarrinho(); // Carregar e exibir o carrinho
     }
     
@@ -51,20 +51,6 @@ public class CarrinhoCompras extends javax.swing.JFrame {
 
         tblCarrinho.setModel(model);
         lblPrecoManga.setText(String.format("R$ %.2f", subtotal));
-        System.out.println("Subtotal do carrinho: R$ " + subtotal);
-    }
-
-    
-    private void imprimirCarrinho() {
-        System.out.println("Detalhes do Carrinho:");
-        for (Compras compra : carrinho.getProdutos()) {
-            System.out.println("ID: " + compra.getId());
-            System.out.println("Mangá: " + (compra.getNomeManga() != null ? compra.getNomeManga() : "Desconhecido"));
-            System.out.println("Quantidade: " + compra.getQuantidade());
-            System.out.println("Preço: R$ " + String.format("%.2f", compra.getPreco()));
-            System.out.println("---------------------------");
-        }
-        System.out.println("Subtotal do carrinho: R$ " + String.format("%.2f", carrinho.getTotal()));
     }
 
     @SuppressWarnings("unchecked")
@@ -80,7 +66,7 @@ public class CarrinhoCompras extends javax.swing.JFrame {
         btnEsvaziar = new javax.swing.JToggleButton();
         iconUsuario = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        nome = new javax.swing.JLabel();
+        lblNomeUsuario = new javax.swing.JLabel();
         lblCarrinhoDeCompras = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -149,9 +135,9 @@ public class CarrinhoCompras extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(68, 68, 68));
         jPanel4.setMinimumSize(new java.awt.Dimension(211, 313));
 
-        nome.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        nome.setForeground(new java.awt.Color(237, 237, 237));
-        nome.setText("LabelNomeUsuario");
+        lblNomeUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblNomeUsuario.setForeground(new java.awt.Color(237, 237, 237));
+        lblNomeUsuario.setText("LabelNomeUsuario");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -159,14 +145,14 @@ public class CarrinhoCompras extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(88, 88, 88)
-                .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(444, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(nome)
+                .addComponent(lblNomeUsuario)
                 .addContainerGap(269, Short.MAX_VALUE))
         );
 
@@ -210,7 +196,7 @@ public class CarrinhoCompras extends javax.swing.JFrame {
             for (Compras compra : carrinho.getProdutos()){
                 Manga manga = Sistema.procuraManga(compra.getId());
                 manga.setEstoque(manga.getEstoque() + compra.getQuantidade());
-                Administrador admin = new Administrador();
+                Administrador admin = new Administrador(); //Instanciando um novo administrador pois o casting de UsuarioLogado para Administrador não é possível.
                 admin.atualizarManga(manga, manga);
             }
             carrinho.zerarCarrinho();
@@ -270,8 +256,8 @@ public class CarrinhoCompras extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblCarrinhoDeCompras;
+    private javax.swing.JLabel lblNomeUsuario;
     private javax.swing.JLabel lblPrecoManga;
-    private javax.swing.JLabel nome;
     private javax.swing.JScrollPane scrllCarrinho;
     private javax.swing.JTable tblCarrinho;
     // End of variables declaration//GEN-END:variables

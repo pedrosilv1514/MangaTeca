@@ -1,6 +1,6 @@
 package Classes;
-import java.util.*;
 
+//Superclasse que representa o gênero do mangá.
 
 public abstract class Genero {
     protected String tipo;

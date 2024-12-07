@@ -41,5 +41,5 @@
 <table>
   <tr>
     <td align="center"><a href="https://github.com/pedrosilv1514" target="_blank"><img style="border-radius: 50%;" src="https://github.com/pedrosilv1514.png" width="100px;" alt="Pedro Henrique"/><br /><sub><b>Pedro Henrique</b></sub></a><br/></td>
-    <td align="center"><a href="https://github.com/eduardopsousa" target="_blank"><img style="border-radius: 50%;" src="https://github.com/eduardopsousa" width="100px;" alt="Eduardo Pereira"/><br /><sub><b>Eduardo Pereira</b></sub></a><br/></td>
+    <td align="center"><a href="https://github.com/eduardopsousa" target="_blank"><img style="border-radius: 50%;" src="https://github.com/eduardopsousa.png" width="100px;" alt="Eduardo Pereira"/><br /><sub><b>Eduardo Pereira</b></sub></a><br/></td>
 </table>
